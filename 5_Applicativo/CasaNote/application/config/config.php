@@ -23,6 +23,11 @@ $dir = str_replace('\\','/',getcwd().'/');
 $final = $actual_link.str_replace($documentRoot,'',$dir);
 
 define('URL', $final);
+define('HOST','localhost');
+define('USERNAME','root');
+define('PASSWORD','');
+define('DATABASE','CasaNote');
+define('PORT','3306');
 
 
 
