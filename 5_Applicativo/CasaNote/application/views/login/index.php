@@ -6,8 +6,8 @@
             <h2>Login</h2>
             <br>
             <div class="form-group">
-                <label for="username">Email</label>
-                <input type="text" name="email" class="form-control" id="email" placeholder="email" required/>
+                <label for="username">Name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
             </div>
 
             <div class="form-group">
@@ -16,7 +16,7 @@
             </div>
 
                 <br>
-                <input type="submit" class="btn btn-primary" name="login" value="Login"/>
+                <input type="submit" class="btn btn-primary" name="login" value="Sign In"/>
         </form>
 
     </div>

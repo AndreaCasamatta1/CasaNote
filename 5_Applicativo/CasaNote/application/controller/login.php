@@ -24,7 +24,7 @@ class login
 
             require_once 'application/libs/validator.php';
 
-            $email = $this->validator->sanitizeInput($_POST['email']);
+            $email = $this->validator->sanitizeInput($_POST['name']);
             $pass = $this->validator->sanitizeInput($_POST['pass']);
 
             require_once 'application/models/AuthModel.php';
