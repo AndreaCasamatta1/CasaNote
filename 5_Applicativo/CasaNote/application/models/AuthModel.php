@@ -10,7 +10,7 @@ class AuthModel
     }
     public function getData($name, $password)
     {
-        $selectAccesso = "SELECT id, password FROM users WHERE email='$name'";
+        $selectAccesso = "SELECT id, password FROM users WHERE username='$name'";
         $this->statement = $this->conn->query($selectAccesso);
         $user = $this->statement->fetch_assoc();
         if ($user && password_verify($password, $user['password'])) {
@@ -23,15 +23,15 @@ class AuthModel
     {
         if ($password !== $password_confirm) {
             echo "Le password non corrispondono.";
-            exit();
+            return null;
         }
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (email, password) VALUES ('$name', '$hashed_password')";
+        $sql = "INSERT INTO users (username, password) VALUES ('$name', '$hashed_password')";
         if ($this->conn->query($sql) === TRUE) {
-            echo "Registrazione completata con successo!";
+            return true;
         } else {
-            echo "Errore durante la registrazione: " . $this->conn->error;
+            return null;
         }
     }
 }

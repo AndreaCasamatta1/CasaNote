@@ -22,20 +22,20 @@ class register
 
             require_once 'application/libs/validator.php';
 
-            $email = $this->validator->sanitizeInput($_POST['name']);
+            $name = $this->validator->sanitizeInput($_POST['name']);
             $password = $this->validator->sanitizeInput($_POST['pass']);
             $password_confirm = $this->validator->sanitizeInput($_POST['pass2']);
 
             require_once 'application/models/AuthModel.php';
             $authModel = new AuthModel();
-            $result = $authModel->registerUser($email, $password, $password_confirm);
-
+            $result = $authModel->registerUser($name, $password, $password_confirm);
             if ($result) {
                 $_SESSION["UserId"] = $result['id'];
-
                 header("Location:" . URL . "home");
+                require_once "application/views/_templates";
                 exit();
             } else {
+                require_once 'application/views/_templates/error.php';
                 $this->index();
             }
         }

@@ -4,7 +4,7 @@
     <base href="<?php echo URL ?>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FAQ</title>
+    <title>CasaNote</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css -->
@@ -23,7 +23,9 @@ $color = isset($_COOKIE['color']) ? '#' . $_COOKIE['color'] : '#FFFFFF'; // Defa
 
 <nav class="navbar navbar-expand-lg bg-dark" >
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon">
+            <img src="application/libs/img/logo.png" width="30" height="30" alt="">
+        </span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
