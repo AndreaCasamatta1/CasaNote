@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<< HEAD
 class Login
+=======
+
+class login
+>>>>>>> 53754a1018050765ba8bf39df3f0afab1c2e67c0
 {
     private $validator;
 
@@ -22,6 +27,7 @@ class Login
         if (isset($_POST['login'])) {
 
             require_once 'application/libs/validator.php';
+<<<<<<< HEAD
             $username = $this->validator->sanitizeInput($_POST['username']);
             $pass = $this->validator->sanitizeInput($_POST['pass']);
             require_once 'application/models/AuthModel.php';
@@ -33,6 +39,18 @@ class Login
                 $_SESSION["nome"] = $result['nome'];
                 $_SESSION["cognome"] = $result['cognome'];
                 $_SESSION["tipo"] = $result['tipo'];
+=======
+
+            $email = $this->validator->sanitizeInput($_POST['email']);
+            $pass = $this->validator->sanitizeInput($_POST['pass']);
+
+            require_once 'application/models/AuthModel.php';
+            $authModel = new AuthModel();
+            $result = $authModel->getData($email, $pass);
+
+            if ($result) {
+                $_SESSION["UserId"] = $result['id'];
+>>>>>>> 53754a1018050765ba8bf39df3f0afab1c2e67c0
 
                 header("Location:" . URL . "admin");
                 exit();
