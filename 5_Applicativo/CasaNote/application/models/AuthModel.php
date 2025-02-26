@@ -8,10 +8,11 @@ class AuthModel
     {
         $this->conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
-    public function getData($name, $password)
+    public function getData($email, $password)
     {
-        $selectAccesso = "SELECT id, password FROM users WHERE username='$name'";
-        $this->statement = $this->conn->query($selectAccesso);
+        $selectAccess = "SELECT id, password FROM users WHERE email='$email'";
+        $this->statement = $this->conn->query($selectAccess);
+        var_dump($this->statement);
         $user = $this->statement->fetch_assoc();
         if ($user && password_verify($password, $user['password'])) {
             return $user;
@@ -19,7 +20,7 @@ class AuthModel
             return null;
         }
     }
-    public function registerUser($name, $password, $password_confirm)
+    public function registerUser($name, $email, $password, $password_confirm)
     {
         if ($password !== $password_confirm) {
             echo "Le password non corrispondono.";
@@ -27,7 +28,7 @@ class AuthModel
         }
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (username, password) VALUES ('$name', '$hashed_password')";
+        $sql = "INSERT INTO users (username, email, password) VALUES ('$name', '$email', '$hashed_password')";
         if ($this->conn->query($sql) === TRUE) {
             return true;
         } else {

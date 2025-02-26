@@ -6,10 +6,6 @@
             <h2>Login</h2>
             <br>
             <div class="form-group">
-                <label for="username">Name</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Name" required/>
-            </div>
-            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" name="email" class="form-control" id="email" placeholder="Email" required/>
             </div>

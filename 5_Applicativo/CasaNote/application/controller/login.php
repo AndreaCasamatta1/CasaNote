@@ -24,17 +24,18 @@ class login
 
             require_once 'application/libs/validator.php';
 
-            $name = $this->validator->sanitizeInput($_POST['name']);
+            $email = $this->validator->sanitizeInput($_POST['email']);
             $pass = $this->validator->sanitizeInput($_POST['pass']);
-
+            var_dump($email);
+            var_dump($pass);
             require_once 'application/models/AuthModel.php';
             $authModel = new AuthModel();
-            $result = $authModel->getData($name, $pass);
-
+            $result = $authModel->getData($email, $pass);
+            var_dump($result);
             if ($result) {
                 $_SESSION["UserId"] = $result['id'];
 
-                header("Location:" . URL . "admin");
+                header("Location:" . URL . "home/main");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';

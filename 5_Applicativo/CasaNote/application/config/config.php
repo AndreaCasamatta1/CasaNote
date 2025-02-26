@@ -30,4 +30,3 @@ define('DATABASE','CasaNote');
 define('PORT','3306');
 
 
-

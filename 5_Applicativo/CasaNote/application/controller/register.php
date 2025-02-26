@@ -19,19 +19,18 @@ class register
     public function register()
     {
         if (isset($_POST['register'])) {
-
             require_once 'application/libs/validator.php';
-
             $name = $this->validator->sanitizeInput($_POST['name']);
+            $email = $this->validator->sanitizeInput($_POST['email']);
             $password = $this->validator->sanitizeInput($_POST['pass']);
             $password_confirm = $this->validator->sanitizeInput($_POST['pass2']);
 
             require_once 'application/models/AuthModel.php';
             $authModel = new AuthModel();
-            $result = $authModel->registerUser($name, $password, $password_confirm);
+            $result = $authModel->registerUser($name,$email, $password, $password_confirm);
             if ($result) {
                 $_SESSION["UserId"] = $result['id'];
-                header("Location:" . URL . "home");
+                header("Location:" . URL . "home/main");
                 require_once "application/views/_templates";
                 exit();
             } else {
