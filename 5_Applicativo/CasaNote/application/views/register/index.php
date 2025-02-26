@@ -11,6 +11,11 @@
             </div>
 
             <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" id="email" placeholder="Email" required/>
+            </div>
+
+            <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" name="pass" class="form-control" id="pass" placeholder="Password" required/>
             </div>
