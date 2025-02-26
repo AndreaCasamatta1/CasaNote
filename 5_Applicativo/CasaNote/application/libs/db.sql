@@ -6,3 +6,8 @@ CREATE TABLE users (
                        password VARCHAR(255) NOT NULL,
                        notes TEXT
 );
+INSERT INTO users (username, password, notes)
+VALUES
+    ('user1', 'password1', 'Note for user1'),
+    ('user2', 'password2', 'Note for user2'),
+    ('user3', 'password3', 'Note for user3');

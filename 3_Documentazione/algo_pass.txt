@@ -1,0 +1,21 @@
+PASSWORD_DEFAULT che utilizza l'algoritmo bcrypt
+
+
+Esempio di output che puoi ottenere usando password_hash():
+
+php
+Copia
+$password = "mysecretpassword";
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+echo $hashed_password;
+Il risultato potrebbe essere una stringa simile a:
+
+perl
+Copia
+$2y$10$wI1hXy3Jnk3ck3PslAAN9OsmBOEiHFvw0H9oK7IlkzGdb9Jz3.M0G
+In questo esempio:
+
+$2y$: indica che l'algoritmo usato è bcrypt.
+10: è il costo di lavoro, che determina il numero di iterazioni per calcolare l'hash (più è alto, più è sicuro ma più lento).
+wI1hXy3Jnk3ck3PslAAN9O: è il sale.
+smBOEiHFvw0H9oK7IlkzGdb9Jz3.M0G: è l'hash risultante della password.
