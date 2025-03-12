@@ -1,35 +1,36 @@
-<?php
-//per non far dare errore all'IDE
-/* @var $note \models\Note */
-?>
+<title>Notes</title>
 
-<div class="m-2 p-2">
-    <h3>Note</h3>
-    <form action="<?php echo URL; ?>admin/saveOrUpdateFaq" method="POST">
-        <input type="hidden" name="id" value="<?php if (isset($faq)): echo $faq->getId(); endif; ?>">
-        <div class="form-group">
-            <label for="questionInput">Domanda</label>
-            <input type="text" name="question" class="form-control" id="questionInput" placeholder="Domanda"
-                   value="<?php if (isset($faq)): echo $faq->getQuestion(); endif; ?>" required/>
-        </div>
-        <div class="form-group">
-            <label for="ris">Risposta</label>
-            <input type="text" name="answer" class="form-control" id="ris" placeholder="Risposta"
-                   value="<?php if (isset($faq)): echo $faq->getAnswer(); endif; ?>"
-                   required/>
-        </div>
-        <div class="form-group">
-            <label for="link">Link</label>
-            <input type="text" name="link" class="form-control" id="link" placeholder="Link"
-                   value="<?php if (isset($faq)): echo $faq->getLink(); endif; ?>"/>
-        </div>
-        <div class="form-group">
+<br>
 
-            <label for="pos">Posizione</label>
-            <input type="number" name="position" class="form-control" id="pos" placeholder="Posizione"
-                   value="<?php if (isset($faq)): echo $faq->getPosition(); endif; ?>"/>
+    <div class="card card-bordered p-1 m-1">
+        <div class="card-body m-1" style="background-color: white">
+            <br>
+
+            <div class="page-header">
+                <h2 class="text-center" style="color:red;font-weight: bold">NOTES</h2>
+            </div>
+
+            <!--Section: NOTES-->
+            <section>
+                <p class="text-center mb-5">
+                    Le tue note
+                </p>
+
+                <div class="row">
+                    <?php foreach ($allNote as $single): ?>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <h6 class="mb-3" style="color: #145eba"><i
+                                        class="far fa-paper-plane pe-2"></i> <?php echo $single->getTitle(); ?></h6>
+                                <p class="mb-2 pb-2" style="border-bottom: #145eba solid thin; border-width: thin">
+                                    <?php echo $single->getDateCreation(); ?>
+                                </p>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+
+            </section>
+            <!--Section: NOTES-->
         </div>
-        <input type="submit" class="btn btn-primary" name="add_modify" value="Submit"/>
-    </form>
-</div>
+    </div>
+
 

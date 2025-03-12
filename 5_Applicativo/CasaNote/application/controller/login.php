@@ -14,6 +14,7 @@ class login
     public function index()
     {
         require 'application/views/_templates/header.php';
+        require 'application/views/_templates/navbar.php';
         require_once 'application/views/login/index.php';
     }
 

@@ -7,7 +7,7 @@ class Home
     public function index()
     {
         require 'application/views/_templates/header.php';
-
+        require 'application/views/_templates/navbar.php';
         require 'application/views/home/index.php';
     }
 
@@ -17,7 +17,8 @@ class Home
         $noteMapper=new \models\NoteMapper();
         $allNote = $noteMapper->fetchAll();
         require 'application/views/_templates/header.php';
-        require 'application/views/home/note.php';
+        require 'application/views/_templates/navbar.php';
+        require 'application/views/manage/note.php';
         require 'application/views/_templates/footer.php';
     }
 }
