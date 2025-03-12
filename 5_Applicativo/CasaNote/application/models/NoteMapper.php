@@ -24,7 +24,6 @@ class NoteMapper
         $selectNote = "SELECT * FROM note ORDER BY title ASC";
         $note = $this->connection->query($selectNote);
         $allNote = array();
-        var_dump($allNote);
         foreach ($note as $line) {
             $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);
             $allNote[] = $note;
@@ -71,10 +70,17 @@ class NoteMapper
     }
 
 
-    public function getAllFIltered($field)
+    public function getAllFiltered($field): array
     {
-        $selectQuery = "SELECT * FROM note WHERE title LIKE '%$field%' ";
-        return $this->connection->query($selectQuery);
+        $selectNote = "SELECT * FROM note WHERE title LIKE '%$field%' ";
+        $note = $this->connection->query($selectNote);
+        $allNote = array();
+        foreach ($note as $line) {
+            $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);
+            $allNote[] = $note;
+            unset($note);
+        }
+        return $allNote;
 
     }
 

@@ -12,7 +12,6 @@ class AuthModel
     {
         $selectAccess = "SELECT id, password FROM users WHERE email='$email'";
         $this->statement = $this->conn->query($selectAccess);
-        var_dump($this->statement);
         $user = $this->statement->fetch_assoc();
         if ($user && password_verify($password, $user['password'])) {
             return $user;
