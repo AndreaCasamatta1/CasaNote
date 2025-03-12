@@ -1,7 +1,7 @@
 <?php
 
 
-class Home
+class home
 {
     public $noteMapper;
     public function index()
@@ -20,7 +20,6 @@ class Home
     {
         $allNote = $this->noteMapper->fetchAll();
         require 'application/views/_templates/header.php';
-        require 'application/views/_templates/navbar.php';
         require 'application/views/manage/note.php';
         require 'application/views/_templates/footer.php';
     }

@@ -27,12 +27,9 @@ class login
 
             $email = $this->validator->sanitizeInput($_POST['email']);
             $pass = $this->validator->sanitizeInput($_POST['pass']);
-            var_dump($email);
-            var_dump($pass);
             require_once 'application/models/AuthModel.php';
             $authModel = new AuthModel();
             $result = $authModel->getData($email, $pass);
-            var_dump($result);
             if ($result) {
                 $_SESSION["UserId"] = $result['id'];
 
