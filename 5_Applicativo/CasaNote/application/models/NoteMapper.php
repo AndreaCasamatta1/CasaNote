@@ -55,12 +55,29 @@ class NoteMapper
 //        return $this->connection->query($addFaq);
 //    }
 //
-//    public function deleteFaq(Faq $faq)
-//    {
-//        $id = $faq->getId();
-//        $deleteFaq = "DELETE from faq WHERE id = $id";
-//        return $this->connection->query($deleteFaq);
-//    }
+    public function deleteNote(Note $note)
+    {
+        $id = $note->getId();
+        $deleteNote = "DELETE from note WHERE id = $id";
+        return $this->connection->query($deleteNote);
+    }
+    public function findById($key): Note
+    {
+        $selectNote = "SELECT * FROM note WHERE id=$key";
+        $faqResult = $this->connection->query($selectNote);
+        $line = $faqResult->fetch_assoc();
+        $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);;
+        return $note;
+    }
+
+
+    public function getAllFIltered($field)
+    {
+        $selectQuery = "SELECT * FROM note WHERE title LIKE '%$field%' ";
+        return $this->connection->query($selectQuery);
+
+    }
+
 //
 //    public function updateFaq(Faq $faqToUpdate,Faq $newFaq)
 //    {
