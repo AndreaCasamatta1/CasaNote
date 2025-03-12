@@ -1,6 +1,6 @@
 <?php
 //per non far dare errore all'IDE
-/* @var $note \models\Note */
+/* @var $note \models\' .,*-' */
 ?>
 
 <div class="m-2 p-2">
