@@ -1469,7 +1469,7 @@ var supportsMicroTasks = isBrowser && window.Promise;
 var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
 
 /**
- * Check if the given variable is a function
+ * check if the given variable is a function
  * @method
  * @memberof Popper.Utils
  * @argument {Any} functionToCheck - variable to check
@@ -1926,7 +1926,7 @@ function getViewportOffsetRectRelativeToArtbitraryNode(element) {
 }
 
 /**
- * Check if the given element is fixed or is inside a fixed parent
+ * check if the given element is fixed or is inside a fixed parent
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element
@@ -3960,7 +3960,7 @@ var Dropdown = function ($$$1) {
 
       if (!this._inNavbar) {
         /**
-         * Check for Popper dependency
+         * check for Popper dependency
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
@@ -4969,7 +4969,7 @@ var Tooltip = function ($$$1) {
   function () {
     function Tooltip(element, config) {
       /**
-       * Check for Popper dependency
+       * check for Popper dependency
        * Popper - https://popper.js.org
        */
       if (typeof Popper === 'undefined') {

@@ -1526,7 +1526,7 @@ var Dropdown = function ($$$1) {
 
       if (!this._inNavbar) {
         /**
-         * Check for Popper dependency
+         * check for Popper dependency
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
@@ -2535,7 +2535,7 @@ var Tooltip = function ($$$1) {
   function () {
     function Tooltip(element, config) {
       /**
-       * Check for Popper dependency
+       * check for Popper dependency
        * Popper - https://popper.js.org
        */
       if (typeof Popper === 'undefined') {

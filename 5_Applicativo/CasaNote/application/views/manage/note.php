@@ -1,43 +1,36 @@
-<<<<<<< HEAD
+
 <?php
 //per non far dare errore all'IDE
 /* @var $note \models\' .,*-' */
 ?>
-=======
 <title>Notes</title>
->>>>>>> 455dbc639abe262acdc8eb8bfb029906299763a1
 
 <br>
 
-    <div class="card card-bordered p-1 m-1">
-        <div class="card-body m-1" style="background-color: white">
-            <br>
+<div class="">
+    <div class="">Note personali:</div>
 
-            <div class="page-header">
-                <h2 class="text-center" style="color:red;font-weight: bold">NOTES</h2>
-            </div>
+    <form action="<?php echo URL; ?>home/filter" method="POST">
+        <input type='text' name='field'>
+        <input type="submit">
+    </form>
+<br>
 
-            <!--Section: NOTES-->
-            <section>
-                <p class="text-center mb-5">
-                    Le tue note
-                </p>
-
-                <div class="row">
-                    <?php foreach ($allNote as $single): ?>
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <h6 class="mb-3" style="color: #145eba"><i
-                                        class="far fa-paper-plane pe-2"></i> <?php echo $single->getTitle(); ?></h6>
-                                <p class="mb-2 pb-2" style="border-bottom: #145eba solid thin; border-width: thin">
-                                    <?php echo $single->getDateCreation(); ?>
-                                </p>
-                        </div>
-                    <?php endforeach ?>
+    <table class="">
+        <?php foreach ($allNote as $single): ?>
+            <div class="col-md-6 col-lg-6 mb-6">
+                <h6 class="mb-6" style="color: #145eba">
+                    <i class="far fa-paper-plane pe-2"></i>
+                    <?php echo $single->getTitle(); ?></h6>
+                <div class="mb-3 pb-3" style="border-bottom: #145eba solid thin; border-width: thin;">
+                    <?php echo $single->getDateCreation(); ?>
+                    <input style="text-align: right; background-color: #dc3545" value="ELIMINA" name=“submitButton" type="submit"></input>
                 </div>
 
-            </section>
-            <!--Section: NOTES-->
-        </div>
-    </div>
+            </div>
+        <?php endforeach; ?>
+    </table>
+</div>
+
 
 
