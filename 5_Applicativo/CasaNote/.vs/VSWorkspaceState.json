@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.idea",
+    "\\application",
+    "\\application\\config",
+    "\\application\\controller",
+    "\\application\\libs",
+    "\\application\\models",
+    "\\application\\views"
+  ],
+  "SelectedNode": "\\.idea\\vcs.xml",
+  "PreviewInSolutionExplorer": false
+}
