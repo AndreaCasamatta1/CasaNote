@@ -30,3 +30,4 @@
 $color = isset($_COOKIE['color']) ? '#' . $_COOKIE['color'] : '#FFFFFF'; // Default: bianco
 ?>
 <body style="background-color: <?php echo htmlspecialchars($color); ?>;">
+    <h1 class="d-flex justify-content-center">CasaNote</h1>

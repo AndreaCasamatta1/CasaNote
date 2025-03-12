@@ -8,7 +8,7 @@
             <input type="text" class="form-control" id="title" placeholder="Inserisci il titolo">
         </div>
         <div class="form-group">
-            <button type="button" class="btn btn-outline-primary position-fixed top-0 end-0 m-3" data-bs-toggle="dropdown">
+            <button type="button" class="btn btn-outline-primary position-fixed m-3" data-bs-toggle="dropdown">
                 +
             </button>
             <ul class="dropdown-menu" id="add-option">
