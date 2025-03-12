@@ -27,7 +27,7 @@
 
     <div class="form-group">
         <label for="title">Titolo</label>
-        <input type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo">
+        <input type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo" required>
     </div>
     <br>
     <br>

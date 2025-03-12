@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-center">
-    <i class="bi bi-cloud-arrow-down">
-        <label>Crea</label>
-    </i>
-    <i class="bi bi-cloud-arrow-down">
-        <label>Personalizza</label>
-    </i>
-    <i class="bi bi-cloud-arrow-down">
-        <label>Esporta</label>
-    </i>
+    <i class="bi bi-cloud-arrow-down">    </i>
+        <p>Crea</p>
+
+    <i class="bi bi-cloud-arrow-down">    </i>
+        <p>Personalizza</p>
+
+    <i class="bi bi-cloud-arrow-down">    </i>
+        <p>Esporta</p>
+
 </div>
