@@ -1,7 +1,21 @@
 <?php
-//per non far dare errore all'IDE
-/* @var $allNote \models\' .,*-' */
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Se esistono note filtrate, usa quelle. Altrimenti, usa tutte le note passate da main().
+if (isset($_SESSION['filtered_notes'])) {
+    $allNote = $_SESSION['filtered_notes'];
+    $hasFilter = true;
+} else {
+    $hasFilter = false;
+}
+
+if (!isset($allNote)) {
+    $allNote = []; // Prevenire errori se non è stato inizializzato
+}
 ?>
+
 <title>Notes</title>
 <div class="">
 
@@ -11,31 +25,42 @@
         </a>
         <div class="card-body m-1" style="background-color: white">
             <br>
-            <br>
             <h1 class="">Note personali:</h1>
             <br>
-            <form action="<?php echo URL; ?>home/main" method="POST">
-                <input type='text' name='field' placeholder="Cerca ">
-                <input type="submit" value="🔍" style="border: none;background: none" >
+
+            <!-- FORM PER LA RICERCA -->
+            <form action="<?php echo URL; ?>home/filter" method="POST">
+                <input type='text' name='field' placeholder="Cerca" value="<?php echo isset($_POST['field']) ? htmlspecialchars($_POST['field']) : ''; ?>">
+                <input type="submit" value="🔍" style="border: none; background: none">
             </form>
+
+            <!-- Bottone per resettare il filtro (mostra tutte le note) -->
+            <?php if ($hasFilter): ?>
+                <form action="<?php echo URL; ?>home/resetFilter" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-secondary mt-2">Mostra tutte le note</button>
+                </form>
+            <?php endif; ?>
+
             <br>
             <table class="">
-                <?php foreach ($allNote as $single): ?>
-                    <div class="col-md-6 col-lg-6 mb-6">
-                        <h6 class="mb-6" style="color: #145eba">
-                            <i class="far fa-newspaper pe-2"></i>
-                            <?php echo $single->getTitle(); ?>
-
-                        </h6>
-                        <div class="mb-3 pb-3" style="border-bottom: #145eba solid thin; border-width: thin;">
-                            <?php echo $single->getDateCreation(); ?>
-                            <input style="text-align: right; background-color: #ff1e21;" value="X"
-                                   name="submitButton" type="submit">
+                <?php if (!empty($allNote)): ?>
+                    <?php foreach ($allNote as $single): ?>
+                        <div class="col-md-6 col-lg-6 mb-6">
+                            <h6 class="mb-6" style="color: #145eba">
+                                <i class="far fa-newspaper pe-2"></i>
+                                <?php echo htmlspecialchars($single->getTitle()); ?>
+                            </h6>
+                            <div class="mb-3 pb-3" style="border-bottom: #145eba solid thin; border-width: thin;">
+                                <?php echo $single->getDateCreation(); ?>
+                                <input style="text-align: right; background-color: #ff1e21;" value="X"
+                                       name="submitButton" type="submit">
+                            </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Nessuna nota trovata.</p>
+                <?php endif; ?>
             </table>
         </div>
-
-
-
+    </div>
+</div>
