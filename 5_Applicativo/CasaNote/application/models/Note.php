@@ -18,7 +18,7 @@ class Note
      */
     public function __construct($id,$title, $dateCreation, $dateLastUpdate)
     {
-        $this->id = id;
+        $this->id = $id;
         $this->title = $title;
         $this->dateCreation = $dateCreation;
         $this->dateLastUpdate = $dateLastUpdate;

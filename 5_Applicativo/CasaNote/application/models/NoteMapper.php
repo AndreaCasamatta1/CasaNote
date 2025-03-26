@@ -25,7 +25,7 @@ class NoteMapper
         $note = $this->connection->query($selectNote);
         $allNote = array();
         foreach ($note as $line) {
-            $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);
+            $note = new Note( $line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
             $allNote[] = $note;
             unset($note);
         }
