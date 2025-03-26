@@ -58,20 +58,16 @@ class manage
                     }
                 }
                 $title = $this->validator->sanitizeInput($_POST['title']);
-                    $data_creation = date('Y-m-d H:i:s');
-                    $note = new \models\Note(null,$title,$data_creation,$data_creation);
+                $data_creation = date('Y-m-d H:i:s');
+                $note = new \models\Note(null, $title, $data_creation, $data_creation);
 
                 if ($this->noteMapper->addNote($note)) {
-                        header('location:' . URL . 'home/main');
-                        exit();
-                    } else {
-                        require_once 'application/views/_templates/error.php';
-                        $this->goToCreateNotePage();
-                    }
+                    header('location:' . URL . 'home/main');
+                    exit();
+                } else {
+                    require_once 'application/views/_templates/error.php';
+                    $this->goToCreateNotePage();
                 }
-             else {
-                 require_once 'application/views/_templates/error.php';
-                 $this->goToCreateNotePage();
-             }
+            }
     }
 }
