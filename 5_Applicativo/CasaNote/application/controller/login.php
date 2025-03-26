@@ -25,9 +25,14 @@ class login
 
             require_once 'application/libs/validator.php';
 
-            $email = $this->validator->sanitizeInput($_POST['email']);
+            $email = $this->validator->sanitizeMail($_POST['email']);
             $pass = $this->validator->sanitizeInput($_POST['pass']);
             require_once 'application/models/AuthModel.php';
+            if (!$this->validator->validateEmail($email)) {
+                require_once 'application/views/_templates/error.php';
+                $this->index();
+                exit();
+            }
             $authModel = new AuthModel();
             $result = $authModel->getData($email, $pass);
             if ($result) {

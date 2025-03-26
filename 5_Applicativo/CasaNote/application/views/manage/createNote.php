@@ -27,7 +27,11 @@
 
     <div class="form-group">
         <label for="title">Titolo</label>
+<<<<<<< HEAD
         <input name="title" type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo">
+=======
+        <input type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo" required>
+>>>>>>> 8ac242815941052928340d8dd17646b24a01dca5
     </div>
     <br>
     <br>

@@ -2,6 +2,7 @@
 
 class manage
 {
+<<<<<<< HEAD
     private $noteMapper;
     private $validator;
     function __construct()
@@ -14,9 +15,14 @@ class manage
     }
     function index()
     {
+=======
+    function goToCreateNotePage()
+    {        require 'application/views/_templates/navbar2.php';
+>>>>>>> 8ac242815941052928340d8dd17646b24a01dca5
         require "application/views/_templates/header.php";
         require "application/views/manage/createNote.php";
     }
+<<<<<<< HEAD
     public function deleteNote($id=null)
     {
         $note = $this->noteMapper->findById();
@@ -66,4 +72,7 @@ class manage
                  $this->goToCreateNotePage();
              }
     }
+=======
+
+>>>>>>> 8ac242815941052928340d8dd17646b24a01dca5
 }

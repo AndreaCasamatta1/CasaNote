@@ -56,32 +56,54 @@ class NoteMapper
     public function deleteNote(Note $note)
     {
         $id = $note->getId();
-        $deleteNote = "DELETE from note WHERE id = $id";
-        return $this->connection->query($deleteNote);
+        $deleteNote = "DELETE FROM note WHERE id = ?";
+
+        $stmt = $this->connection->prepare($deleteNote);
+        $stmt->bind_param("i", $id); // Bind dell'ID come intero
+        $result = $stmt->execute();
+        $stmt->close();
+
+        return $result;
     }
-    public function findById($key): Note
+
+    public function findById($key): ?Note
     {
-        $selectNote = "SELECT * FROM note WHERE id=$key";
-        $faqResult = $this->connection->query($selectNote);
-        $line = $faqResult->fetch_assoc();
-        $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);;
-        return $note;
+        $selectNote = "SELECT * FROM note WHERE id = ?";
+
+        $stmt = $this->connection->prepare($selectNote);
+        $stmt->bind_param("i", $key);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        if ($line = $result->fetch_assoc()) {
+            return new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+        } else {
+            return null; // Se la nota non esiste, restituisce null
+        }
     }
+
 
 
     public function getAllFiltered($field): array
     {
-        $selectNote = "SELECT * FROM note WHERE title LIKE '%$field%' ";
-        $note = $this->connection->query($selectNote);
-        $allNote = array();
-        foreach ($note as $line) {
+        $selectNote = "SELECT * FROM note WHERE title LIKE ?";
+        $stmt = $this->connection->prepare($selectNote);
+        $searchTerm = "%$field%";
+        $stmt->bind_param("s", $searchTerm);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $allNote = [];
+
+        while ($line = $result->fetch_assoc()) {
             $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);
             $allNote[] = $note;
-            unset($note);
         }
-        return $allNote;
 
+        return $allNote;
     }
+
 
 //
 //    public function updateFaq(Faq $faqToUpdate,Faq $newFaq)
