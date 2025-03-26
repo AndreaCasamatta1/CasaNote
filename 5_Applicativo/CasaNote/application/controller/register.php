@@ -6,7 +6,7 @@ class register
 
     public function __construct()
     {
-        require_once "application/libs/validator.php";
+        require_once "application/libs/Validator.php";
         $this->validator = new Validator();
     }
 

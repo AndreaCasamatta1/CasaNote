@@ -43,17 +43,16 @@ class NoteMapper
 //    }
 
 
-//    public function addFaq(Faq $faq)
-//    {
-//        $question = $faq->getQuestion();
-//        $answer = $faq->getAnswer();
-//        $link = $faq->getLink();
-//        $position = $faq->getPosition();
-//
-//        $addFaq = "INSERT INTO faq (question,answer,link,position) VALUES ('$question', '$answer', '$link', $position)";
-//        return $this->connection->query($addFaq);
-//    }
-//
+    public function addNote(Note $note)
+    {
+        $title = $note->getTitle();
+        $dateCreation = $note->getDateCreation();
+        $datelastUpdate = $note->getDateLastUpdate();
+
+        $addNote = "INSERT INTO note(title,date_creation,date_last_update) VALUES ('$title', '$dateCreation', '$datelastUpdate')";
+        return $this->connection->query($addNote);
+    }
+
     public function deleteNote(Note $note)
     {
         $id = $note->getId();
