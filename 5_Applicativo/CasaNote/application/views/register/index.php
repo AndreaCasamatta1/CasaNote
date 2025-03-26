@@ -4,6 +4,13 @@
         <form method="POST" action="<?php echo URL; ?>register/register">
 
             <h2>Register</h2>
+            <?php if (isset($_SESSION['error_message'])): ?>
+                <div class="alert alert-danger">
+                    <?php echo $_SESSION['error_message']; ?>
+                </div>
+                <?php unset($_SESSION['error_message']); ?>
+            <?php endif; ?>
+
             <br>
             <div class="form-group">
                 <label for="username">Name</label>

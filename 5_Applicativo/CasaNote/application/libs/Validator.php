@@ -22,6 +22,27 @@ class Validator
         $data = htmlspecialchars($data);
         return $data;
     }
+    public function sanitizeMail($data)
+    {
+        // Rimuove spazi iniziali/ finali
+        $data = trim($data);
+
+        // Rimuove caratteri speciali
+        $data = filter_var($data, FILTER_SANITIZE_EMAIL);
+
+        return $data;
+    }
+
+    // Funzione per validare email
+    public function validateEmail($data)
+    {
+        if (filter_var($data, FILTER_VALIDATE_EMAIL)) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 }

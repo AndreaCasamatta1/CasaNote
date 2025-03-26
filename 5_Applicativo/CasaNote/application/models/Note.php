@@ -4,8 +4,11 @@ namespace models;
 
 class Note
 {
+    private $id;
     private $title;
     private $dateCreation;
+
+
     private $dateLastUpdate;
 
     /**
@@ -13,13 +16,29 @@ class Note
      * @param $dateCreation
      * @param $dateLastUpdate
      */
-    public function __construct($title, $dateCreation, $dateLastUpdate)
+    public function __construct($id,$title, $dateCreation, $dateLastUpdate)
     {
+        $this->id = $id;
         $this->title = $title;
         $this->dateCreation = $dateCreation;
         $this->dateLastUpdate = $dateLastUpdate;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
     /**
      * @return mixed
      */

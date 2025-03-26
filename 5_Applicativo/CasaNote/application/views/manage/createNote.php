@@ -1,5 +1,10 @@
+<?php
+//per non far dare errore all'IDE
+/* @var $note \models\Note */
+?>
+
 <script src="application/views/_templates/static/js/manageInput.js"></script>
-<form method="POST" action="manage/saveOrUpdateNote">
+<form method="POST" action="<?php echo URL; ?>manage/saveOrUpdateNote<?php if (isset($note)): echo '/' . $note->getId(); endif; ?>">
     <nav class="navbar navbar-expand-lg m-0">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><img src="application/libs/img/logo.png" width="30" height="30" alt=""></span>
@@ -13,11 +18,11 @@
                     <div class="form-group">
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
                             +
-                        </button>
-                        <ul class="dropdown-menu" id="add-option">
-                            <li><a class="dropdown-item" onclick="addInput('text')">Text</a></li>
-                            <li><a class="dropdown-item" onclick="addInput('attachment')">Attachment</a></li>
-                            <li><a class="dropdown-item" onclick="addInput('draw')">Draw</a></li>
+        </button>
+        <ul class="dropdown-menu" id="add-option">
+            <li><a class="dropdown-item" onclick="addInput('text')">Text</a></li>
+            <li><a class="dropdown-item" onclick="addInput('attachment')">Attachment</a></li>
+            <li><a class="dropdown-item" onclick="addInput('draw')">Draw</a></li>
                         </ul>
                     </div>
                 </li>
@@ -27,7 +32,7 @@
 
     <div class="form-group">
         <label for="title">Titolo</label>
-        <input type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo" required>
+        <input name="title" type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo" value="<?php if (isset($note)): echo $note->getTitle(); endif; ?>" required>
     </div>
     <br>
     <br>

@@ -2,11 +2,13 @@
 
 namespace models;
 require_once "Note.php";
+namespace models;
+require_once "Note.php";
+
 class NoteMapper
 {
     private $validator;
     private $connection;
-
 
     public function __construct()
     {
@@ -14,7 +16,6 @@ class NoteMapper
         $this->validator = new \Validator();
         $this->connection = new \mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
-
 
     /**
      * @return array
@@ -25,75 +26,88 @@ class NoteMapper
         $note = $this->connection->query($selectNote);
         $allNote = array();
         foreach ($note as $line) {
-            $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
             $allNote[] = $note;
             unset($note);
         }
         return $allNote;
     }
 
+    public function addNote(Note $note)
+    {
+        $title = $note->getTitle();
+        $dateCreation = $note->getDateCreation();
+        $datelastUpdate = $note->getDateLastUpdate();
 
-//    public function findById($key): Note
-//    {
-//        $selectNote = "SELECT * FROM faq WHERE id=$key";
-//        $faqResult = $this->connection->query($selectFaq);
-//        $line = $faqResult->fetch_assoc();
-//        $faq = new Faq($line['id'], $line['question'], $line['answer'], $line['link'], $line['position']);
-//        return $note;
-//    }
+        $addNote = "INSERT INTO note(title,date_creation,date_last_update) VALUES (?, ?, ?)";
+        $stmt = $this->connection->prepare($addNote);
+        $stmt->bind_param("sss", $title, $dateCreation, $datelastUpdate); // Bind dei parametri
+        return $stmt->execute();
+    }
 
-
-//    public function addFaq(Faq $faq)
-//    {
-//        $question = $faq->getQuestion();
-//        $answer = $faq->getAnswer();
-//        $link = $faq->getLink();
-//        $position = $faq->getPosition();
-//
-//        $addFaq = "INSERT INTO faq (question,answer,link,position) VALUES ('$question', '$answer', '$link', $position)";
-//        return $this->connection->query($addFaq);
-//    }
-//
     public function deleteNote(Note $note)
     {
         $id = $note->getId();
-        $deleteNote = "DELETE from note WHERE id = $id";
-        return $this->connection->query($deleteNote);
-    }
-    public function findById($key): Note
-    {
-        $selectNote = "SELECT * FROM note WHERE id=$key";
-        $faqResult = $this->connection->query($selectNote);
-        $line = $faqResult->fetch_assoc();
-        $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);;
-        return $note;
+        $deleteNote = "DELETE FROM note WHERE id = ?";
+
+        $stmt = $this->connection->prepare($deleteNote);
+        $stmt->bind_param("i", $id); // Bind dell'ID come intero
+        $result = $stmt->execute();
+        $stmt->close();
+
+        return $result;
     }
 
+    public function findById($key): ?Note
+    {
+        $selectNote = "SELECT * FROM note WHERE id = ?";
+
+        $stmt = $this->connection->prepare($selectNote);
+        $stmt->bind_param("i", $key);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        if ($line = $result->fetch_assoc()) {
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            return $note;
+        } else {
+            return null; // Se la nota non esiste, restituisce null
+        }
+    }
 
     public function getAllFiltered($field): array
     {
-        $selectNote = "SELECT * FROM note WHERE title LIKE '%$field%' ";
-        $note = $this->connection->query($selectNote);
-        $allNote = array();
-        foreach ($note as $line) {
-            $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);
-            $allNote[] = $note;
-            unset($note);
-        }
-        return $allNote;
+        $selectNote = "SELECT * FROM note WHERE title LIKE ?";
+        $stmt = $this->connection->prepare($selectNote);
+        $searchTerm = "%$field%";
+        $stmt->bind_param("s", $searchTerm);
+        $stmt->execute();
 
+        $result = $stmt->get_result();
+        $allNote = [];
+
+        while ($line = $result->fetch_assoc()) {
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            $allNote[] = $note;
+        }
+
+        return $allNote;
     }
 
-//
-//    public function updateFaq(Faq $faqToUpdate,Faq $newFaq)
-//    {
-//        $id = $faqToUpdate->getId();
-//        $question = $newFaq->getQuestion();
-//        $answer = $newFaq->getAnswer();
-//        $link = $newFaq->getLink();
-//        $position = $newFaq->getPosition();
-//
-//        $updateFaq = "UPDATE faq SET question ='$question', answer = '$answer',link = '$link',position = $position WHERE id =$id";
-//        return $this->connection->query($updateFaq);
-//    }
+    public function updateNote(Note $noteToUpdate, Note $newNote)
+    {
+        $id = $noteToUpdate->getId();
+        $title = $newNote->getTitle(); // Corretto il nome della variabile
+        $dateLastUpdate = $newNote->getDateLastUpdate();
+
+        // Preparazione della query di aggiornamento con i parametri legati
+        $updateNote = "UPDATE note SET title = ?, date_last_update = ? WHERE id = ?";
+        $stmt = $this->connection->prepare($updateNote);
+        $stmt->bind_param("ssi", $title, $dateLastUpdate, $id); // Bind dei parametri
+        $result = $stmt->execute();
+        $stmt->close();
+
+        return $result;
+    }
 }
