@@ -32,10 +32,9 @@ class manage
             return;
         }
         $note = $this->noteMapper->findById($id);
-
         if ($note) {
             if ($this->noteMapper->deleteNote($note)) {
-                header("location: " . URL . "home/main");
+                header("location: " . URL . "home/resetFilter");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';
