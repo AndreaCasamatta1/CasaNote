@@ -23,24 +23,23 @@ if (!isset($allNote)) {
         <a href="<?php echo URL; ?>/manage/goToCreateNotePage" class="btn btn-outline-primary position-fixed top-0 m-3">
             + Aggiungi Nota
         </a>
+        <br>
         <div class="card-body m-1" style="background-color: white">
             <br>
             <h1 class="">Note personali:</h1>
-            <br>
 
-            <!-- FORM PER LA RICERCA -->
+            <!-- FORM RICERCA -->
             <form action="<?php echo URL; ?>home/filter" method="POST">
                 <input type='text' name='field' placeholder="Cerca" value="<?php echo isset($_POST['field']) ? htmlspecialchars($_POST['field']) : ''; ?>">
                 <input type="submit" value="🔍" style="border: none; background: none">
             </form>
-
-            <!-- Bottone per resettare il filtro (mostra tutte le note) -->
+            <!-- Bottone resettare filtro (mostra tutte le note) -->
             <?php if ($hasFilter): ?>
                 <form action="<?php echo URL; ?>home/resetFilter" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-secondary mt-2">Mostra tutte le note</button>
                 </form>
             <?php endif; ?>
-
+            <br>
             <br>
             <table class="">
                 <?php if (!empty($allNote)): ?>
