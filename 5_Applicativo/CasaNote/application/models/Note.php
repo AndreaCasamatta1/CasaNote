@@ -16,14 +16,14 @@ class Note
      * @param $dateCreation
      * @param $dateLastUpdate
      */
-    public function __construct($title, $dateCreation, $dateLastUpdate)
+    public function __construct($id,$title, $dateCreation, $dateLastUpdate)
     {
         $this->id = id;
         $this->title = $title;
         $this->dateCreation = $dateCreation;
         $this->dateLastUpdate = $dateLastUpdate;
     }
-    
+
     /**
      * @return mixed
      */

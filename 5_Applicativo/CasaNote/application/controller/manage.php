@@ -33,12 +33,26 @@ class manage
             $this->index();
         }
     }
-    public function saveNote()
+    public function saveOrUpdateNote()
     {
             if (isset($_POST['title'])) {
+                if (!empty($_POST['id'])) {
+                    $title = $this->validator->sanitizeInput($_POST['title']);
+                    $id = $this->validator->sanitizeInput($_POST['id']);
+                    $noteToUpdate = $this->noteMapper->findById($id);
+                    $newNote = new Note($id, $title);
+
+                    if ($this->faqMapper->updateNote($noteToUpdate, $newNote)) {
+                        header('location:' . URL . 'admin');
+                        exit();
+                    } else {
+                        require_once 'application/views/admin/error.php';
+                        $this->index();
+                    }
+                }
                 $title = $this->validator->sanitizeInput($_POST['title']);
                     $data_creation = date('Y-m-d H:i:s');
-                    $note = new \models\Note($title,$data_creation,$data_creation);
+                    $note = new \models\Note(null,$data_creation,$data_creation);
 
                 if ($this->noteMapper->addNote($note, $data_creation,$data_creation)) {
                         header('location:' . URL . 'home/main');
@@ -52,22 +66,5 @@ class manage
                  require_once 'application/views/_templates/error.php';
                  $this->goToCreateNotePage();
              }
-    }
-
-    public function updateNote()
-    {
-        if (!empty($_POST['id'])) {
-            $id = $this->validator->sanitizeInput($_POST['id']);
-            $noteToUpdate = $this->noteMapper->findById($id);
-            $newNote = new Note($id, $title);
-
-            if ($this->faqMapper->updateFaq($faqToUpdate, $newFaq)) {
-                header('location:' . URL . 'admin');
-                exit();
-            } else {
-                require_once 'application/views/admin/error.php';
-                $this->index();
-            }
-        }
     }
 }
