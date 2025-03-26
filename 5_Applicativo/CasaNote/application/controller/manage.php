@@ -73,5 +73,6 @@ class manage
             require_once 'application/views/_templates/error.php';
             $this->goToCreateNotePage();
         }
+
     }
 }

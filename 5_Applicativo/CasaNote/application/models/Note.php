@@ -23,7 +23,7 @@ class Note
         $this->dateCreation = $dateCreation;
         $this->dateLastUpdate = $dateLastUpdate;
     }
-    
+
     /**
      * @return mixed
      */

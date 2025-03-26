@@ -1,5 +1,6 @@
 <script src="application/views/_templates/static/js/manageInput.js"></script>
-<form method="POST" action="<?php echo URL; ?>manage/saveNote">
+<form method="POST" action="<?php echo URL; ?>manage/saveOrUpdateNote">
+    <input type="hidden" name="id" value="<?php if (isset($note)): echo $note->getId(); endif; ?>">
     <nav class="navbar navbar-expand-lg m-0">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><img src="application/libs/img/logo.png" width="30" height="30" alt=""></span>
