@@ -55,7 +55,7 @@ class manage
                 if ($noteToUpdate) {
                     $newNote = new \models\Note($id, $title, $noteToUpdate->getDateCreation(),$data_last_update);
                     if ($this->noteMapper->updateNote($noteToUpdate, $newNote)) {
-                        header('location:' . URL . 'home/main');
+                        header('location:' . URL . 'home/resetFilter');
                         exit();
                     } else {
                         require_once 'application/views/_templates/error.php';
@@ -70,7 +70,7 @@ class manage
                 $data_last_update = date('Y-m-d H:i:s');
                 $note = new \models\Note(null, $title, $data_creation, $data_last_update);
                 if ($this->noteMapper->addNote($note)) {
-                    header('location:' . URL . 'home/main');
+                    header('location:' . URL . 'home/resetFilter');
                     exit();
                 } else {
                     require_once 'application/views/_templates/error.php';
