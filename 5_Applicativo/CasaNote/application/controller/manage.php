@@ -33,27 +33,10 @@ class manage
             $this->index();
         }
     }
-    public function saveOrUpdateNote()
+    public function saveNote()
     {
-            //se è una modifica
             if (isset($_POST['title'])) {
                 $title = $this->validator->sanitizeInput($_POST['title']);
-//                //se è una modifica
-//                if (!empty($_POST['id'])) {
-//                    $id = $this->validator->sanitizeInput($_POST['id']);
-//                    $faqToUpdate = $this->faqMapper->findById($id);
-//                    $newFaq = new Faq($id, $question, $answer, $link, $position);
-//
-//                    if ($this->faqMapper->updateFaq($faqToUpdate, $newFaq)) {
-//                        header('location:' . URL . 'admin');
-//                        exit();
-//                    } else {
-//                        require_once 'application/views/admin/error.php';
-//                        $this->index();
-//                    }
-//                } //se è una nuova faq
-//                else {
-//
                     $data_creation = date('Y-m-d H:i:s');
                     $note = new \models\Note($title,$data_creation,$data_creation);
 
@@ -69,5 +52,22 @@ class manage
                  require_once 'application/views/_templates/error.php';
                  $this->goToCreateNotePage();
              }
+    }
+
+    public function updateNote()
+    {
+        if (!empty($_POST['id'])) {
+            $id = $this->validator->sanitizeInput($_POST['id']);
+            $noteToUpdate = $this->noteMapper->findById($id);
+            $newNote = new Note($id, $title);
+
+            if ($this->faqMapper->updateFaq($faqToUpdate, $newFaq)) {
+                header('location:' . URL . 'admin');
+                exit();
+            } else {
+                require_once 'application/views/admin/error.php';
+                $this->index();
+            }
+        }
     }
 }

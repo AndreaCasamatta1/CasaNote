@@ -105,16 +105,14 @@ class NoteMapper
     }
 
 
-//
-//    public function updateFaq(Faq $faqToUpdate,Faq $newFaq)
-//    {
-//        $id = $faqToUpdate->getId();
-//        $question = $newFaq->getQuestion();
-//        $answer = $newFaq->getAnswer();
-//        $link = $newFaq->getLink();
-//        $position = $newFaq->getPosition();
-//
-//        $updateFaq = "UPDATE faq SET question ='$question', answer = '$answer',link = '$link',position = $position WHERE id =$id";
-//        return $this->connection->query($updateFaq);
-//    }
+
+    public function updateNote(Note $noteToUpdate,Note $newNote)
+    {
+        $id = $noteToUpdate->getId();
+        $question = $newNote->getTitle();
+        $dateLastUpdate = $newNote->getDateLastUpdate();
+
+        $updateFaq = "UPDATE note SET title ='title', date_last_update = '$dateLastUpdate' WHERE id =$id";
+        return $this->connection->query($updateFaq);
+    }
 }
