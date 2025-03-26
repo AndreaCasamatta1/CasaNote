@@ -45,6 +45,7 @@ class NoteMapper
 
     public function addNote(Note $note)
     {
+
         $title = $note->getTitle();
         $dateCreation = $note->getDateCreation();
         $datelastUpdate = $note->getDateLastUpdate();
@@ -77,7 +78,8 @@ class NoteMapper
         $stmt->close();
 
         if ($line = $result->fetch_assoc()) {
-            return new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            return $note;
         } else {
             return null; // Se la nota non esiste, restituisce null
         }
@@ -97,7 +99,7 @@ class NoteMapper
         $allNote = [];
 
         while ($line = $result->fetch_assoc()) {
-            $note = new Note($line['title'], $line['date_creation'], $line['date_last_update']);
+            $note = new Note($line['id'],$line['title'], $line['date_creation'], $line['date_last_update']);
             $allNote[] = $note;
         }
 

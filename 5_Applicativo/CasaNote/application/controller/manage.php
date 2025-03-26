@@ -22,52 +22,56 @@ class manage
         require "application/views/_templates/header.php";
         require "application/views/manage/createNote.php";
     }
-    public function deleteNote($id=null)
+    public function deleteNote($id = null)
     {
-        $note = $this->noteMapper->findById();
-        if ($this->noteMapper->deleteFaq($note)) {
-            header("location: " . URL . "home/main");
-            exit();
-        } else {
-            require_once 'application/views/_templates/error.php';
-            $this->index();
+        if ($id === null) {
+            echo "ID della nota non fornito.";
+            return;
         }
-    }
-    public function saveNote()
-    {
-            if (isset($_POST['title'])) {
-                $title = $this->validator->sanitizeInput($_POST['title']);
-                    $data_creation = date('Y-m-d H:i:s');
-                    $note = new \models\Note($title,$data_creation,$data_creation);
+        $note = $this->noteMapper->findById($id);
 
-                if ($this->noteMapper->addNote($note, $data_creation,$data_creation)) {
-                        header('location:' . URL . 'home/main');
-                        exit();
-                    } else {
-                        require_once 'application/views/_templates/error.php';
-                        $this->goToCreateNotePage();
-                    }
-                }
-             else {
-                 require_once 'application/views/_templates/error.php';
-                 $this->goToCreateNotePage();
-             }
-    }
-
-    public function updateNote()
-    {
-        if (!empty($_POST['id'])) {
-            $id = $this->validator->sanitizeInput($_POST['id']);
-            $noteToUpdate = $this->noteMapper->findById($id);
-            $newNote = new Note($id, $title);
-
-            if ($this->faqMapper->updateFaq($faqToUpdate, $newFaq)) {
-                header('location:' . URL . 'admin');
+        if ($note) {
+            if ($this->noteMapper->deleteNote($note)) {
+                header("location: " . URL . "home/main");
                 exit();
             } else {
-                require_once 'application/views/admin/error.php';
+                require_once 'application/views/_templates/error.php';
                 $this->index();
             }
+        }
+    }
+    public function saveOrUpdateNote()
+    {
+        if (isset($_POST['title'])) {
+            if (!empty($_POST['id'])) {
+                $title = $this->validator->sanitizeInput($_POST['title']);
+                $id = $this->validator->sanitizeInput($_POST['id']);
+                $noteToUpdate = $this->noteMapper->findById($id);
+                $newNote = new Note($id, $title);
+
+                if ($this->faqMapper->updateNote($noteToUpdate, $newNote)) {
+                    header('location:' . URL . 'home/main');
+                    exit();
+                } else {
+                    require_once 'application/views/_templates/error.php';
+                    $this->index();
+                }
+            }
+            $title = $this->validator->sanitizeInput($_POST['title']);
+            $data_creation = date('Y-m-d H:i:s');
+            $note = new \models\Note(null,$data_creation,$data_creation);
+
+            if ($this->noteMapper->addNote($note, $data_creation,$data_creation)) {
+                header('location:' . URL . 'home/main');
+                exit();
+            } else {
+                require_once 'application/views/_templates/error.php';
+                $this->goToCreateNotePage();
+            }
+        }
+        else {
+            require_once 'application/views/_templates/error.php';
+            $this->goToCreateNotePage();
         }
     }
 }
