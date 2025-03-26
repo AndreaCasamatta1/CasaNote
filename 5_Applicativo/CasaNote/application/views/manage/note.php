@@ -20,7 +20,7 @@ if (!isset($allNote)) {
 <div class="">
 
     <div class="card card-bordered p-1 m-1">
-        <a href="<?php echo URL; ?>/manage/index" class="btn btn-outline-primary position-fixed top-0 m-3">
+        <a href="<?php echo URL; ?>/manage/goToCreateNotePage" class="btn btn-outline-primary position-fixed top-0 m-3">
             + Aggiungi Nota
         </a>
         <br>
