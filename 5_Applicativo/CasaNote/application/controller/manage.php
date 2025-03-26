@@ -19,7 +19,6 @@ class manage
     }
     function goToCreateNotePage($id = null)
     {
-        var_dump($id);
         $note = $this->noteMapper->findById($id);
         require 'application/views/_templates/navbar2.php';
         require "application/views/_templates/header.php";
