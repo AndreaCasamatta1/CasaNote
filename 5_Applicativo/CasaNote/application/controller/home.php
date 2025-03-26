@@ -68,6 +68,13 @@ class home
             $this->index();
         }
     }
+    public function user()
+    {
+        require 'application/views/_templates/navbar2.php';
+        require 'application/views/_templates/header.php';
+        require 'application/views/profile/index.php';
+        require 'application/views/_templates/footer.php';
+    }
 
 
 

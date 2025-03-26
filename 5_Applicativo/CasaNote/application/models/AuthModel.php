@@ -48,4 +48,35 @@ class AuthModel
             return null;
         }
     }
+    public function updateName($userId, $newName)
+    {
+        // Aggiorna il nome dell'utente
+        $sql = "UPDATE users SET username = ? WHERE id = ?";
+        $this->statement = $this->conn->prepare($sql);
+        $this->statement->bind_param("si", $newName, $userId);
+
+        return $this->statement->execute();
+    }
+
+    public function updatePassword($userId, $newPassword)
+    {
+        // Aggiorna la password dell'utente
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
+        $this->statement = $this->conn->prepare($sql);
+        $this->statement->bind_param("si", $hashedPassword, $userId);
+
+        return $this->statement->execute();
+    }
+
+    public function deleteUser($userId)
+    {
+        // Elimina l'account utente
+        $sql = "DELETE FROM users WHERE id = ?";
+        $this->statement = $this->conn->prepare($sql);
+        $this->statement->bind_param("i", $userId);
+
+        return $this->statement->execute();
+    }
 }
