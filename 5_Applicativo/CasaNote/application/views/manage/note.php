@@ -51,8 +51,7 @@ if (!isset($allNote)) {
                             </h6>
                             <div class="mb-3 pb-3" style="border-bottom: #145eba solid thin; border-width: thin;">
                                 <?php echo $single->getDateCreation(); ?>
-                                <input style="text-align: right; background-color: #ff1e21;" value="X"
-                                       name="submitButton" type="submit">
+                                <input style="text-align: right; background-color: #ff1e21;" value="X" name="submitButton" type="submit">
                             </div>
                         </div>
                     <?php endforeach; ?>

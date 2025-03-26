@@ -57,7 +57,6 @@ class manage
                     $data_creation = date('Y-m-d H:i:s');
                     $note = new \models\Note($title,$data_creation,$data_creation);
 
-                    var_dump($this->noteMapper->addNote($note));
                 if ($this->noteMapper->addNote($note, $data_creation,$data_creation)) {
                         header('location:' . URL . 'home/main');
                         exit();
