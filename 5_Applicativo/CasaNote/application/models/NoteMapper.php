@@ -77,7 +77,8 @@ class NoteMapper
         $stmt->close();
 
         if ($line = $result->fetch_assoc()) {
-            return new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            return $note;
         } else {
             return null; // Se la nota non esiste, restituisce null
         }

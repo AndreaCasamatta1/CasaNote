@@ -51,7 +51,8 @@ if (!isset($allNote)) {
                             </h6>
                             <div class="mb-3 pb-3" style="border-bottom: #145eba solid thin; border-width: thin;">
                                 <?php echo $single->getDateCreation(); ?>
-                                <a href="<?php echo URL . 'manage/deleteFaq/' . $single->getId(); ?>" class="btn btn-danger"  onclick="return confirm('Sicuro?')">x</a>
+                                <a href="<?php echo URL . 'manage/deleteNote/' . $single->getId(); ?>" class="btn btn-danger"  onclick="return confirm('Sicuro?')">x</a>
+                                <a href="<?php echo URL . 'manage/goToCreateNotePage/' . $single->getId();?>" class="btn btn-primary">update</a>
                             </div>
                         </div>
                     <?php endforeach; ?>

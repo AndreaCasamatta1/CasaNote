@@ -1,3 +1,8 @@
+<?php
+//per non far dare errore all'IDE
+/* @var $note \models\Note */
+?>
+
 <script src="application/views/_templates/static/js/manageInput.js"></script>
 <form method="POST" action="<?php echo URL; ?>manage/saveOrUpdateNote">
     <input type="hidden" name="id" value="<?php if (isset($note)): echo $note->getId(); endif; ?>">
@@ -28,7 +33,7 @@
 
     <div class="form-group">
         <label for="title">Titolo</label>
-        <input name="title" type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo" required>
+        <input name="title" type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo" value="<?php if (isset($note)): echo $note->getTitle(); endif; ?>"" required>
     </div>
     <br>
     <br>

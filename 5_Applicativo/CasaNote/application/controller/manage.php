@@ -22,15 +22,22 @@ class manage
         require "application/views/_templates/header.php";
         require "application/views/manage/createNote.php";
     }
-    public function deleteNote($id=null)
+    public function deleteNote($id = null)
     {
-        $note = $this->noteMapper->findById();
-        if ($this->noteMapper->deleteFaq($note)) {
-            header("location: " . URL . "home/main");
-            exit();
-        } else {
-            require_once 'application/views/_templates/error.php';
-            $this->index();
+        if ($id === null) {
+            echo "ID della nota non fornito.";
+            return;
+        }
+        $note = $this->noteMapper->findById($id);
+
+        if ($note) {
+            if ($this->noteMapper->deleteNote($note)) {
+                header("location: " . URL . "home/main");
+                exit();
+            } else {
+                require_once 'application/views/_templates/error.php';
+                $this->index();
+            }
         }
     }
     public function saveOrUpdateNote()
@@ -43,18 +50,18 @@ class manage
                     $newNote = new Note($id, $title);
 
                     if ($this->faqMapper->updateNote($noteToUpdate, $newNote)) {
-                        header('location:' . URL . 'admin');
+                        header('location:' . URL . 'home/main');
                         exit();
                     } else {
-                        require_once 'application/views/admin/error.php';
+                        require_once 'application/views/_templates/error.php';
                         $this->index();
                     }
                 }
                 $title = $this->validator->sanitizeInput($_POST['title']);
                     $data_creation = date('Y-m-d H:i:s');
-                    $note = new \models\Note(null,$data_creation,$data_creation);
+                    $note = new \models\Note(null,$title,$data_creation,$data_creation);
 
-                if ($this->noteMapper->addNote($note, $data_creation,$data_creation)) {
+                if ($this->noteMapper->addNote($note)) {
                         header('location:' . URL . 'home/main');
                         exit();
                     } else {
