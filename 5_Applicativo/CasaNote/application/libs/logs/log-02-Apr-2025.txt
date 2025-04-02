@@ -40,3 +40,110 @@
 )
  
 [10:48:13 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 10 
+[10:49:50 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[10:49:50 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 24
+    [email] => andrea.casamatta@samtrevano.i
+    [username] => fxweg
+)
+ 
+[10:49:50 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 24
+    [email] => andrea.casamatta@samtrevano.i
+    [username] => fxweg
+)
+ 
+[10:49:50 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 24 
+[10:52:01 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[10:52:01 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 25
+    [email] => andrea.casamatta@samtrevano.com
+    [username] => MasterChick97
+)
+ 
+[10:52:01 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 25
+    [email] => andrea.casamatta@samtrevano.com
+    [username] => MasterChick97
+)
+ 
+[10:52:01 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 25 
+[10:54:05 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[10:54:05 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 25
+    [email] => andrea.casamatta@samtrevano.com
+    [username] => MasterChick97
+    [password] => $2y$10$he65RWZH7LZDImYWZTSXaeL9v5wZUyM0JnreuTNKWP.w5lDUKDL3y
+)
+ 
+[10:54:05 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 25
+    [email] => andrea.casamatta@samtrevano.com
+    [username] => MasterChick97
+    [password] => $2y$10$he65RWZH7LZDImYWZTSXaeL9v5wZUyM0JnreuTNKWP.w5lDUKDL3y
+)
+ 
+[10:54:05 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 25 
+[11:07:34 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[11:07:34 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 27
+    [email] => andrea.casamatta@samtrevano.com
+    [username] => MasterChick97
+    [password] => $2y$10$wPoZxVBarzxJjY.bjlo33.kEkCr7XkycrtyBkU48ClhmWtN9W142G
+)
+ 
+[11:07:34 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 27
+    [email] => andrea.casamatta@samtrevano.com
+    [username] => MasterChick97
+    [password] => $2y$10$wPoZxVBarzxJjY.bjlo33.kEkCr7XkycrtyBkU48ClhmWtN9W142G
+)
+ 
+[11:07:34 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 27 
+[11:07:50 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[11:08:02 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[11:08:02 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 28
+    [email] => andrea.casamatta@samtrevano.cgom
+    [username] => MasterChick97
+    [password] => $2y$10$.Wlie9RhOQMg6068hrDFCuOVJjZpqC/ATzforcU.giQnwgmjbe2iG
+)
+ 
+[11:08:02 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 28
+    [email] => andrea.casamatta@samtrevano.cgom
+    [username] => MasterChick97
+    [password] => $2y$10$.Wlie9RhOQMg6068hrDFCuOVJjZpqC/ATzforcU.giQnwgmjbe2iG
+)
+ 
+[11:08:02 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 28 
+[11:11:07 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [79] : [INFO] - Email gia usata 
+[11:11:07 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[11:11:14 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[11:11:14 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 29
+    [email] => andrea.casamatta@samtrevano.fbcom
+    [username] => fxweg
+    [password] => $2y$10$O.O0xBgT/jaToj1lY8vpzO.A5AceSPi6skB1A5cOGRT8iNzoZVHmC
+)
+ 
+[11:11:14 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 29
+    [email] => andrea.casamatta@samtrevano.fbcom
+    [username] => fxweg
+    [password] => $2y$10$O.O0xBgT/jaToj1lY8vpzO.A5AceSPi6skB1A5cOGRT8iNzoZVHmC
+)
+ 
+[11:11:14 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 29 

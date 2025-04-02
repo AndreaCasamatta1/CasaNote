@@ -44,7 +44,7 @@ class register
                     header("Location:" . URL . "home/main");
                     exit();
                 } else {
-                    Logger::error("Errore: utente non trovato o password errata.");
+                    Logger::error("Errore: utente non trovato, password errata o email gia in uso.");
                     require_once 'application/views/_templates/error.php';
                     $this->index();
                     exit();

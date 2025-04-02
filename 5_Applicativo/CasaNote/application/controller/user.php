@@ -19,10 +19,8 @@ class user
     public function updateName()
     {
         if (isset($_POST['newName'])) {
-            $newName = $this->validator->sanitizeInput($_POST['newName']);
+            $newName = $_POST['newName'];
             $userId = $_SESSION['UserId'];
-            var_dump($userId);
-            var_dump($this->authModel->updateName($userId, $newName));
             if ($this->authModel->updateName($userId, $newName)) {
                 header("location: " . URL . "home/main");
                 exit();
@@ -40,9 +38,9 @@ class user
             $userId = $_SESSION['UserId'];
 
             // Verifica la password attuale
-            $userData = $this->authModel->getData($_SESSION['email'], $oldPassword);
+            $userData = $this->authModel->getUserInfo($_SESSION['email'], $oldPassword);
             if ($userData && $this->authModel->updatePassword($userId, $newPassword)) {
-                header("location: " . URL . "home/user");
+                header("location: " . URL . "home/main");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';

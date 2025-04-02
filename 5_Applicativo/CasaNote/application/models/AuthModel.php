@@ -13,7 +13,7 @@ class AuthModel
     public function getUserInfo($email)
     {
 
-        $selectUserInfo = "SELECT id, email, username FROM users WHERE email = ?";
+        $selectUserInfo = "SELECT id, email, username,password FROM users WHERE email = ?";
 
         $this->statement = $this->conn->prepare($selectUserInfo);
         $this->statement->bind_param("s", $email);
@@ -57,22 +57,35 @@ class AuthModel
 
     public function registerUser($name, $email, $password, $password_confirm)
     {
+        // Verifica se le password corrispondono
         if ($password !== $password_confirm) {
             echo "Le password non corrispondono.";
             return null;
         }
-
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (username, email, password)
+        SELECT ?, ?, ?
+        WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = ?)";
+
+
         $this->statement = $this->conn->prepare($sql);
-        $this->statement->bind_param("sss", $name, $email, $hashed_password);
+        $this->statement->bind_param("ssss", $name, $email, $hashed_password, $email);
 
         if ($this->statement->execute()) {
-            return true;
+
+            if ($this->statement->affected_rows > 0) {
+                return true;
+            } else {
+                Logger::info("Email gia usata");
+                return null;
+            }
         } else {
             return null;
         }
     }
+
+
+
     public function updateName($userId, $newName)
     {
         // Aggiorna il nome dell'utente
