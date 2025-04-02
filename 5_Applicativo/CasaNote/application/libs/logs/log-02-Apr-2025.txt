@@ -147,3 +147,26 @@
 )
  
 [11:11:14 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 29 
+[14:19:00 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/user.php] [24] : [INFO] - N/A 
+[14:21:19 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/user.php] [25] : [INFO] - 29 
+[14:21:34 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/user.php] [25] : [INFO] - 29 
+[14:30:17 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [79] : [INFO] - Email gia usata 
+[14:30:17 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[14:30:29 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[14:30:29 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 30
+    [email] => andrea.casamatta@samtrevano.ggcom
+    [username] => ds
+    [password] => $2y$10$OthXwKMo/ICz26RIst4L9e9TyZszJIT5c8hnbAOC8IuX7QYZUyjBe
+)
+ 
+[14:30:29 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 30
+    [email] => andrea.casamatta@samtrevano.ggcom
+    [username] => ds
+    [password] => $2y$10$OthXwKMo/ICz26RIst4L9e9TyZszJIT5c8hnbAOC8IuX7QYZUyjBe
+)
+ 
+[14:30:29 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 30 
