@@ -58,7 +58,7 @@ class user
 
             if ($this->authModel->deleteUser($userId)) {
                 session_destroy();
-                header("location: " . URL . "home/main");
+                header("location: " . URL . "logout");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';
