@@ -18,11 +18,11 @@ class user
     }
     public function updateName()
     {
+        session_start();
         if (isset($_POST['newName'])) {
-            $newName = $this->validator->sanitizeInput($_POST['newName']);
+            $newName = $_POST['newName'];
             $userId = $_SESSION['UserId'];
-            var_dump($userId);
-            var_dump($this->authModel->updateName($userId, $newName));
+            Logger::info($userId);
             if ($this->authModel->updateName($userId, $newName)) {
                 header("location: " . URL . "home/main");
                 exit();
@@ -34,15 +34,16 @@ class user
     }
     public function updatePassword()
     {
+        session_start();
         if (isset($_POST['oldPassword'], $_POST['newPassword']) && isset($_SESSION['UserId'])) {
             $oldPassword = $_POST['oldPassword'];
             $newPassword = $_POST['newPassword'];
             $userId = $_SESSION['UserId'];
 
             // Verifica la password attuale
-            $userData = $this->authModel->getData($_SESSION['email'], $oldPassword);
+            $userData = $this->authModel->getUserInfo($_SESSION['email'], $oldPassword);
             if ($userData && $this->authModel->updatePassword($userId, $newPassword)) {
-                header("location: " . URL . "home/user");
+                header("location: " . URL . "home/main");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';
@@ -51,6 +52,7 @@ class user
     }
     public function deleteAccount()
     {
+        session_start();
         if (isset($_SESSION['UserId'])) {
             $userId = $_SESSION['UserId'];
 
