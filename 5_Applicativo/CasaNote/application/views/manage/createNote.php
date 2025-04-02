@@ -18,11 +18,11 @@
                     <div class="form-group">
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown">
                             +
-        </button>
-        <ul class="dropdown-menu" id="add-option">
-            <li><a class="dropdown-item" onclick="addInput('text')">Text</a></li>
-            <li><a class="dropdown-item" onclick="addInput('attachment')">Attachment</a></li>
-            <li><a class="dropdown-item" onclick="addInput('draw')">Draw</a></li>
+                        </button>
+                        <ul class="dropdown-menu" id="add-option">
+                            <li><a class="dropdown-item" onclick="addInput('text')">Text</a></li>
+                            <li><a class="dropdown-item" onclick="addInput('attachment')">Attachment</a></li>
+                            <li><a class="dropdown-item" onclick="addInput('draw')">Draw</a></li>
                         </ul>
                     </div>
                 </li>

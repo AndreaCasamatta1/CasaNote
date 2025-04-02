@@ -40,3 +40,19 @@
 )
  
 [10:48:13 02-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 10 
+[10:51:53 02-Apr-2025] [localhost/application/controller/register.php] [37] : [INFO] - 1 
+[10:51:53 02-Apr-2025] [localhost/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 2
+    [email] => paolo.comes@samtrevano.ch
+    [username] => Gino
+)
+ 
+[10:51:53 02-Apr-2025] [localhost/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 2
+    [email] => paolo.comes@samtrevano.ch
+    [username] => Gino
+)
+ 
+[10:51:53 02-Apr-2025] [localhost/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 2 

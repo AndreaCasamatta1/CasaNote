@@ -26,6 +26,7 @@ function addInput(type) {
             <canvas id="draw-canvas" class="canvas-container"></canvas>
             <button type="button" class="btn btn-secondary mt-2" onclick="clearCanvas()">Clear Drawing</button>
         `;
+
     } else {
         return;
     }
