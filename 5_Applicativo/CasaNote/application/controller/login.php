@@ -3,12 +3,15 @@
 
 class login
 {
+    private $authModel;
     private $validator;
 
     public function __construct()
     {
         require_once "application/libs/validator.php";
         $this->validator = new Validator();
+        require_once "application/models/AuthModel.php";
+        $this->authModel = new AuthModel();
     }
 
     public function index()
@@ -27,14 +30,12 @@ class login
 
             $email = $this->validator->sanitizeMail($_POST['email']);
             $pass = $this->validator->sanitizeInput($_POST['pass']);
-            require_once 'application/models/AuthModel.php';
             if (!$this->validator->validateEmail($email)) {
                 require_once 'application/views/_templates/error.php';
                 $this->index();
                 exit();
             }
-            $authModel = new AuthModel();
-            $result = $authModel->getData($email, $pass);
+            $result = $this->authModel->verifyUser($email, $pass);
             if ($result) {
                 $_SESSION["UserId"] = $result['id'];
 

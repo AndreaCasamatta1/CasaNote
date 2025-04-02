@@ -12,16 +12,23 @@ class user
         require_once "application/libs/Validator.php";
         $this->validator = new Validator();
     }
+    function index()
+    {
+
+    }
     public function updateName()
     {
-        if (isset($_POST['newName']) && isset($_SESSION['UserId'])) {
+        if (isset($_POST['newName'])) {
             $newName = $this->validator->sanitizeInput($_POST['newName']);
-            $userId = $_SESSION['user_id'];
+            $userId = $_SESSION['UserId'];
+            var_dump($userId);
+            var_dump($this->authModel->updateName($userId, $newName));
             if ($this->authModel->updateName($userId, $newName)) {
-                header("location: " . URL . "home/user");
+                header("location: " . URL . "home/main");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';
+                $this->index();
             }
         }
     }
@@ -49,10 +56,11 @@ class user
 
             if ($this->authModel->deleteUser($userId)) {
                 session_destroy();
-                header("location: " . URL . "home");
+                header("location: " . URL . "home/main");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';
+                $this->index();
             }
         }
     }

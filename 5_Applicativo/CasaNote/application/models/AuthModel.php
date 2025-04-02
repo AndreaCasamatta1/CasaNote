@@ -9,24 +9,51 @@ class AuthModel
     {
         $this->conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
-
-    public function getData($email, $password)
+// 1. getUserInfo Method
+    public function getUserInfo($email)
     {
-        // Usa il prepared statement con bind_param
-        $selectAccess = "SELECT id, password FROM users WHERE email = ?";
-        $this->statement = $this->conn->prepare($selectAccess);  // Preparazione della query
-        $this->statement->bind_param("s", $email);  // Bind del parametro (stringa 's' per l'email)
-        $this->statement->execute();  // Esecuzione della query
+
+        $selectUserInfo = "SELECT id, email, username FROM users WHERE email = ?";
+
+        $this->statement = $this->conn->prepare($selectUserInfo);
+        $this->statement->bind_param("s", $email);
+        $this->statement->execute();
 
         $result = $this->statement->get_result();
         $user = $result->fetch_assoc();
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user) {
+            Logger::info("User info found: " . print_r($user, true));
             return $user;
         } else {
             return null;
         }
     }
+
+    public function verifyUser($email, $password)
+    {
+
+        $selectAccess = "SELECT id, password, username FROM users WHERE email = ?";
+
+
+        $this->statement = $this->conn->prepare($selectAccess);
+        $this->statement->bind_param("s", $email);
+        $this->statement->execute();
+
+        $result = $this->statement->get_result();
+        $user = $result->fetch_assoc();
+
+        Logger::info("Verifica utente: " . print_r($user, true));
+
+        // Verifica la password
+        if ($user && password_verify($password, $user['password'])) {
+            Logger::info("Password verificata per l'utente: " . $user['username']);
+            return $user;
+        } else {
+            return null;
+        }
+    }
+
 
     public function registerUser($name, $email, $password, $password_confirm)
     {
@@ -36,11 +63,9 @@ class AuthModel
         }
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Usa il prepared statement per prevenire SQL injection
         $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-        $this->statement = $this->conn->prepare($sql);  // Preparazione della query
-        $this->statement->bind_param("sss", $name, $email, $hashed_password);  // Bind dei parametri (tre stringhe 'sss')
+        $this->statement = $this->conn->prepare($sql);
+        $this->statement->bind_param("sss", $name, $email, $hashed_password);
 
         if ($this->statement->execute()) {
             return true;
