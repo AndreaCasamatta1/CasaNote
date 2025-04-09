@@ -36,7 +36,7 @@ if (!isset($allNote)) {
             <div class="d-flex justify-content-between">
                 <form action="<?php echo URL; ?>home/sortByDate" method="POST">
                     <button type="submit" class="btn btn-outline-info">
-                        <?php echo isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc' ? 'Ordina Crescente' : 'Ordina Decrescente'; ?>
+                        <?php echo isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc' ? 'Ordina Meno Recente' : 'Ordina Più Recente'; ?>
                     </button>
                 </form>
                 <form action="<?php echo URL; ?>home/resetFilter" method="POST" style="display:inline;">

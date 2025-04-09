@@ -41,12 +41,13 @@ class user
             $userId = $_SESSION['UserId'];
 
             // Verifica la password attuale
-            $userData = $this->authModel->getUserInfo($_SESSION['email'], $oldPassword);
-            if ($userData && $this->authModel->updatePassword($userId, $newPassword)) {
+            $userData = $this->authModel->getUserInfo($userId);
+            if ( $this->authModel->updatePassword($userId, $newPassword)) {
                 header("location: " . URL . "home/main");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';
+                $this->index();
             }
         }
     }
