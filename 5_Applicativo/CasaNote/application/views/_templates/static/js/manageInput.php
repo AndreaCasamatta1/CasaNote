@@ -1,3 +1,4 @@
+<script>
 function addInput(type) {
     const dynamicFields = document.getElementById('dynamic-fields');
     let newInput;
@@ -44,22 +45,26 @@ function saveTextAttachment(button) {
     formData.append('attachment_type', 'text');
     formData.append('attachment_content', textInput.value);
 
-    fetch('<?php echo URL; ?>manage/saveAttachment', {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json())
-        .then(data => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?php echo URL; ?>manage/saveAttachment', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
             if (data.success) {
                 alert('Testo salvato con successo');
             } else {
                 alert('Errore nel salvataggio del testo');
             }
-        }).catch(error => {
-        console.error('Errore:', error);
+        } else {
+            alert('Errore nella richiesta.');
+        }
+    };
+    xhr.onerror = function() {
+        console.error('Errore:', xhr.statusText);
         alert('Errore nella richiesta.');
-    });
+    };
+    xhr.send(formData);
 }
-
 function saveFileAttachment(button) {
     const fileInput = button.previousElementSibling;
     const form = document.querySelector('form');
@@ -67,23 +72,26 @@ function saveFileAttachment(button) {
     formData.append('attachment_type', 'file');
     formData.append('attachment_file', fileInput.files[0]);
 
-    fetch('<?php echo URL; ?>manage/saveAttachment', {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json())
-        .then(data => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?php echo URL; ?>manage/saveAttachment', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
             if (data.success) {
                 alert('Allegato salvato con successo');
             } else {
                 alert('Errore nel salvataggio dell\'allegato');
             }
-        }).catch(error => {
-        console.error('Errore:', error);
+        } else {
+            alert('Errore nella richiesta.');
+        }
+    };
+    xhr.onerror = function() {
+        console.error('Errore:', xhr.statusText);
         alert('Errore nella richiesta.');
-    });
+    };
+    xhr.send(formData);
 }
-
-
 function saveDrawing(button) {
     const canvas = document.getElementById('draw-canvas');
     const dataURL = canvas.toDataURL();
@@ -92,20 +100,25 @@ function saveDrawing(button) {
     formData.append('attachment_type', 'draw');
     formData.append('attachment_content', dataURL);
 
-    fetch('<?php echo URL; ?>manage/saveAttachment', {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json())
-        .then(data => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?php echo URL; ?>manage/saveAttachment', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
             if (data.success) {
                 alert('Disegno salvato con successo');
             } else {
                 alert('Errore nel salvataggio del disegno');
             }
-        }).catch(error => {
-        console.error('Errore:', error);
+        } else {
+            alert('Errore nella richiesta.');
+        }
+    };
+    xhr.onerror = function() {
+        console.error('Errore:', xhr.statusText);
         alert('Errore nella richiesta.');
-    });
+    };
+    xhr.send(formData);
 }
 
 function clearCanvas() {
@@ -113,3 +126,4 @@ function clearCanvas() {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+</script>

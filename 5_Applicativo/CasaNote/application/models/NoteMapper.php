@@ -125,6 +125,14 @@ class NoteMapper
         return $allNote;
     }
 
-
+    public function getLastNoteId()
+    {
+        $selectNote = "SELECT id FROM note ORDER BY id DESC LIMIT 1";
+        $result = $this->connection->query($selectNote);
+        if ($line = $result->fetch_assoc()) {
+            return (int) $line['id'];
+        }
+        return null;
+    }
 
 }

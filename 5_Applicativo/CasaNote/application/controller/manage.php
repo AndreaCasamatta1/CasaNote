@@ -6,7 +6,6 @@ class manage
     private $validator;
 
     private $attachmentMapper;
-
     function __construct()
     {
         require_once "application/models/Note.php";
@@ -92,52 +91,67 @@ class manage
 
     public function saveAttachment()
     {
+
         if (isset($_POST['attachment_type'])) {
             $attachmentType = $_POST['attachment_type'];
-            $noteId = isset($_POST['note_id']) ? (int)$_POST['note_id'] : null;
+            $noteId = $this->noteMapper->getLastNoteId() + 1;
 
             if ($noteId === null) {
                 echo json_encode(['success' => false, 'message' => 'Nota non trovata']);
+                Logger::error('Nota non trovata');
                 exit();
             }
-
+            Logger::info('id ' . $noteId);
             $noteFolder = "uploads/note_{$noteId}";
             if (!file_exists($noteFolder)) {
                 mkdir($noteFolder, 0777, true);
+                Logger::info('Cartella creata' . $noteFolder);
             }
 
             switch ($attachmentType) {
                 case 'file':
+                    Logger::info('Tipo di Attchment : File');
                     if (isset($_FILES['attachment_file']) && $_FILES['attachment_file']) {
                         $fileName = basename($_FILES['attachment_file']['name']);
                         $filePath = $noteFolder . '/' . $fileName;
+                        Logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
                         if (move_uploaded_file($_FILES['attachment_file']['tmp_name'], $filePath)) {
                             $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, $_FILES['attachment_file']['type'], $noteId, 'file');
+                            Logger::info('salvataggio file');
                             echo json_encode(['success' => true]);
                         } else {
                             echo json_encode(['success' => false, 'message' => 'Errore nel caricamento del file']);
+                            Logger::error('Errore nel caricamento del file');
                         }
                     } else {
                         echo json_encode(['success' => false, 'message' => 'Nessun file caricato']);
+                        Logger::error('Nessun file caricato');
                     }
                     break;
                 case 'text':
                     if (isset($_POST['attachment_content'])) {
+
+                        $timestamp = date("Y-m-d_H-i-s");
                         $textContent = $_POST['attachment_content'];
-                        $fileName = "testo_{$noteId}.txt";
+                        $fileName = "testo_{$noteId}" . "-" . $timestamp . ".txt";
                         $filePath = $noteFolder . '/' . $fileName;
+                        Logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
                         file_put_contents($filePath, $textContent);
                         $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, 'text/plain', $noteId, 'text');
                         echo json_encode(['success' => true]);
+                        Logger::info($fileName . " " . $filePath . " salvato");
+
+                        $_SESSION['countFiletxt'] = $this->countFiletxt;  // Salva il nuovo valore del contatore nella sessione
                     } else {
                         echo json_encode(['success' => false, 'message' => 'Nessun testo fornito']);
+                        Logger::error($this->fileName . " " . $this->filePath . " fallito salvataggio");
                     }
                     break;
-
                 case 'draw':
                     if (isset($_POST['attachment_content'])) {
+                        $timestamp = date("Y-m-d_H-i-s");
                         $drawingContent = $_POST['attachment_content'];
-                        $fileName = "disegno_{$noteId}.png";
+                        $fileName = "disegno_{$noteId}". "-" . $timestamp . ".png";
                         $filePath = $noteFolder . '/' . $fileName;
                         $imageData = base64_decode(str_replace('data:image/png;base64,', '', $drawingContent));
                         file_put_contents($filePath, $imageData);
@@ -147,7 +161,6 @@ class manage
                         echo json_encode(['success' => false, 'message' => 'Nessun disegno fornito']);
                     }
                     break;
-
                 default:
                     echo json_encode(['success' => false, 'message' => 'Tipo di allegato non valido']);
                     break;
@@ -155,6 +168,16 @@ class manage
         } else {
             echo json_encode(['success' => false, 'message' => 'Tipo di allegato mancante']);
         }
+    }
+    function generateRandomNumber($min,$max) {
+        static $arrayNumeri = [];
+
+        do {
+            $numero = rand($min, $max);
+        } while (in_array($numero, $arrayNumeri));
+
+        $arrayNumeri[] = $numero;
+        return $numero;
     }
 }
 

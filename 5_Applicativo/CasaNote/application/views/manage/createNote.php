@@ -1,9 +1,9 @@
 <?php
 // per non far dare errore all'IDE
 /* @var $note \models\Note */
-?>
+include 'application/views/_templates/static/js/manageInput.php';
 
-<script src="application/views/_templates/static/js/manageInput.js"></script>
+?>
 
 <form method="POST" action="<?php echo URL; ?>manage/saveOrUpdateNote<?php if (isset($note)): echo '/' . $note->getId(); endif; ?>">
     <nav class="navbar navbar-expand-lg m-0">

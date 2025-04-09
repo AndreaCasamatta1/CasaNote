@@ -14,7 +14,10 @@ class user
     }
     function index()
     {
-
+        require 'application/views/_templates/navbar2.php';
+        require 'application/views/_templates/header.php';
+        require 'application/views/profile/index.php';
+        require 'application/views/_templates/footer.php';
     }
     public function updateName()
     {
@@ -40,9 +43,7 @@ class user
             $newPassword = $_POST['newPassword'];
             $userId = $_SESSION['UserId'];
 
-            // Verifica la password attuale
-            $userData = $this->authModel->getUserInfo($userId);
-            if ( $this->authModel->updatePassword($userId, $newPassword)) {
+            if ($this->authModel->updatePassword($userId, $newPassword,$oldPassword)) {
                 header("location: " . URL . "home/main");
                 exit();
             } else {

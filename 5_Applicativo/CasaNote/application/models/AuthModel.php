@@ -9,6 +9,7 @@ class AuthModel
     {
         $this->conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
+
 // 1. getUserInfo Method
     public function getUserInfo($email)
     {
@@ -84,7 +85,6 @@ class AuthModel
     }
 
 
-
     public function updateName($userId, $newName)
     {
         // Aggiorna il nome dell'utente
@@ -95,17 +95,29 @@ class AuthModel
         return $this->statement->execute();
     }
 
-    public function updatePassword($userId, $newPassword)
+    public function updatePassword($userId, $newPassword, $oldPassword)
     {
-        // Aggiorna la password dell'utente
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-        $sql = "UPDATE users SET password = ? WHERE id = ?";
-        $this->statement = $this->conn->prepare($sql);
-        $this->statement->bind_param("si", $hashedPassword, $userId);
+        $selectPassword = "SELECT password FROM users WHERE id = ?";
+        $this->statement = $this->conn->prepare($selectPassword);
+        $this->statement->bind_param("i", $userId);
+        $this->statement->execute();
+        $result = $this->statement->get_result();
+        $user = $result->fetch_assoc();
+        $currentPassword = $user['password'];
+        if (password_verify($oldPassword, $currentPassword)) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            // Aggiorna la password
+            $sql = "UPDATE users SET password = ? WHERE id = ?";
+            $this->statement = $this->conn->prepare($sql);
+            $this->statement->bind_param("si", $hashedPassword, $userId);
 
-        return $this->statement->execute();
+            return $this->statement->execute();
+        }
+
+        return false;
     }
+
 
     public function deleteUser($userId)
     {
