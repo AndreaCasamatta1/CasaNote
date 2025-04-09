@@ -20,7 +20,7 @@ if (!isset($allNote)) {
 <div class="">
 
     <div class="card card-bordered p-1 m-1">
-        <a href="<?php echo URL; ?>/manage/goToCreateNotePage" class="btn btn-outline-primary position-fixed top-0 m-3">
+        <a href="<?php echo URL; ?>manage/goToCreateNotePage" class="btn btn-outline-primary position-fixed top-0 m-3">
             + Aggiungi Nota
         </a>
         <br>
@@ -28,21 +28,17 @@ if (!isset($allNote)) {
             <br>
             <h1 class="">Note personali:</h1>
 
-            <!-- FORM RICERCA -->
             <form action="<?php echo URL; ?>home/filter" method="POST">
                 <input type='text' name='field' placeholder="Cerca" value="<?php echo isset($_POST['field']) ? htmlspecialchars($_POST['field']) : ''; ?>">
                 <input type="submit" value="🔍" style="border: none; background: none">
             </form>
             <br>
             <div class="d-flex justify-content-between">
-                <!-- Bottone per ordinamento crescente o decrescente -->
                 <form action="<?php echo URL; ?>home/sortByDate" method="POST">
                     <button type="submit" class="btn btn-outline-info">
                         <?php echo isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc' ? 'Ordina Crescente' : 'Ordina Decrescente'; ?>
                     </button>
                 </form>
-
-                <!-- Bottone per resettare il filtro e riportare le note per ID -->
                 <form action="<?php echo URL; ?>home/resetFilter" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-secondary mt-2">Mostra tutte le note</button>
                 </form>
