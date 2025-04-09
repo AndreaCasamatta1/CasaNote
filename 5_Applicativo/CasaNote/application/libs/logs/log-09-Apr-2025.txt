@@ -269,3 +269,42 @@
 )
  
 [13:20:03 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 17 
+[13:49:41 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[13:49:50 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[13:49:50 09-Apr-2025] [localhost/CasaNote/application/models/AuthModel.php] [27] : [INFO] - User info found: Array
+(
+    [id] => 9
+    [email] => hajec40431@noroasis.com
+    [username] => Gino
+    [password] => $2y$10$rV9wmEDUrhTc7bqNjK68TO.kXBMvEBurunZXmLBd7J6DS8mAqGDpC
+)
+ 
+[13:49:50 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 9
+    [email] => hajec40431@noroasis.com
+    [username] => Gino
+    [password] => $2y$10$rV9wmEDUrhTc7bqNjK68TO.kXBMvEBurunZXmLBd7J6DS8mAqGDpC
+)
+ 
+[13:49:50 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 9 
+[14:16:30 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[14:16:38 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[14:16:38 09-Apr-2025] [localhost/CasaNote/application/models/AuthModel.php] [27] : [INFO] - User info found: Array
+(
+    [id] => 10
+    [email] => a@ti.chj
+    [username] => Gino
+    [password] => $2y$10$UjNCUyOUSN2MRxt5Tia1rO76aEOnpXdhj3Al81r/imoCZtp.DbHgO
+)
+ 
+[14:16:38 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 10
+    [email] => a@ti.chj
+    [username] => Gino
+    [password] => $2y$10$UjNCUyOUSN2MRxt5Tia1rO76aEOnpXdhj3Al81r/imoCZtp.DbHgO
+)
+ 
+[14:16:38 09-Apr-2025] [localhost/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 10 
+[14:16:47 09-Apr-2025] [localhost/CasaNote/application/controller/user.php] [28] : [INFO] - 10 
