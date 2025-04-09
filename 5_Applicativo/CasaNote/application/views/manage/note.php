@@ -33,12 +33,22 @@ if (!isset($allNote)) {
                 <input type='text' name='field' placeholder="Cerca" value="<?php echo isset($_POST['field']) ? htmlspecialchars($_POST['field']) : ''; ?>">
                 <input type="submit" value="🔍" style="border: none; background: none">
             </form>
-            <!-- Bottone resettare filtro (mostra tutte le note) -->
-            <?php if ($hasFilter): ?>
+            <br>
+            <div class="d-flex justify-content-between">
+                <!-- Bottone per ordinamento crescente o decrescente -->
+                <form action="<?php echo URL; ?>home/sortByDate" method="POST">
+                    <button type="submit" class="btn btn-outline-info">
+                        <?php echo isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc' ? 'Ordina Crescente' : 'Ordina Decrescente'; ?>
+                    </button>
+                </form>
+
+                <!-- Bottone per resettare il filtro e riportare le note per ID -->
                 <form action="<?php echo URL; ?>home/resetFilter" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-secondary mt-2">Mostra tutte le note</button>
                 </form>
-            <?php endif; ?>
+            </div>
+
+
             <br>
             <br>
             <table class="">
@@ -50,7 +60,7 @@ if (!isset($allNote)) {
                                 <?php echo htmlspecialchars($single->getTitle()); ?>
                             </h6>
                             <div class="mb-3 pb-3" style="border-bottom: #145eba solid thin; border-width: thin;">
-                                <?php echo $single->getDateCreation(); ?>
+                                <?php echo $single->getDateLastUpdate(); ?>
                                 <a href="<?php echo URL . 'manage/deleteNote/' . $single->getId(); ?>" class="btn btn-danger"  onclick="return confirm('Sicuro?')">x</a>
                                 <a href="<?php echo URL . 'manage/goToCreateNotePage/' . $single->getId();?>" class="btn btn-primary">aggiorna</a>
                             </div>

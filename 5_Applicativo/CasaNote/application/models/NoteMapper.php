@@ -72,7 +72,7 @@ class NoteMapper
             $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
             return $note;
         } else {
-            return null; // Se la nota non esiste, restituisce null
+            return null; // nota non esiste, restituisce null
         }
     }
 
@@ -110,4 +110,21 @@ class NoteMapper
 
         return $result;
     }
+
+    public function fetchAllSortedByDate($order = 'asc')
+    {
+
+        $selectNote = "SELECT * FROM note ORDER BY date_last_update " . ($order === 'desc' ? 'DESC' : 'ASC') . ", date_creation " . ($order === 'desc' ? 'DESC' : 'ASC');
+        $result = $this->connection->query($selectNote);
+        $allNote = [];
+        while ($line = $result->fetch_assoc()) {
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            $allNote[] = $note;
+        }
+
+        return $allNote;
+    }
+
+
+
 }

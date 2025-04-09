@@ -20,8 +20,14 @@ class home
 
     public function main()
     {
+        if (isset($_SESSION['order_by_date'])) {
+            $order = $_SESSION['order_by_date'];
+        } else {
+            $order = 'asc';
+        }
 
-        $allNote = $this->noteMapper->fetchAll();
+
+        $allNote = $this->noteMapper->fetchAllSortedByDate($order);
         require 'application/views/_templates/navbar2.php';
         require 'application/views/_templates/header.php';
         require 'application/views/manage/note.php';
@@ -46,9 +52,11 @@ class home
     public function resetFilter()
     {
         session_start();
-        unset($_SESSION['filtered_notes']); // Rimuove il filtro
+        unset($_SESSION['filtered_notes']);
+        unset($_SESSION['order_by_date']);
         $this->main();
     }
+
     public function deleteNote($id = null)
     {
 
@@ -68,6 +76,21 @@ class home
             $this->index();
         }
     }
+
+    public function sortByDate()
+    {
+        session_start();
+
+
+        if (isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc') {
+            $_SESSION['order_by_date'] = 'asc';
+        } else {
+            $_SESSION['order_by_date'] = 'desc';
+        }
+        $this->main();
+    }
+
+
     public function user()
     {
         require 'application/views/_templates/navbar2.php';

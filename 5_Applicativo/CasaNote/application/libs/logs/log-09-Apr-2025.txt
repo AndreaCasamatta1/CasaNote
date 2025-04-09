@@ -18,3 +18,39 @@
 )
  
 [08:32:23 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 34 
+[09:02:27 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[09:02:27 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 1
+    [email] => andrea.casamatta@samtrevano.cdh
+    [username] => d
+    [password] => $2y$10$zaZ84a9ZdrbKACsfFJsONu6OFNOgL5eYOJk.GhafUKOhP.5IVHjIi
+)
+ 
+[09:02:27 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 1
+    [email] => andrea.casamatta@samtrevano.cdh
+    [username] => d
+    [password] => $2y$10$zaZ84a9ZdrbKACsfFJsONu6OFNOgL5eYOJk.GhafUKOhP.5IVHjIi
+)
+ 
+[09:02:27 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 1 
+[09:16:03 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[09:16:03 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [26] : [INFO] - User info found: Array
+(
+    [id] => 2
+    [email] => andrea.casamatta@samtrevanor.grgrrg
+    [username] => weg
+    [password] => $2y$10$EcgcwDBxncUyALG477bk3.Msh4a0PfBEkyC8Fg.GRXjh2h45N1k1i
+)
+ 
+[09:16:03 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 2
+    [email] => andrea.casamatta@samtrevanor.grgrrg
+    [username] => weg
+    [password] => $2y$10$EcgcwDBxncUyALG477bk3.Msh4a0PfBEkyC8Fg.GRXjh2h45N1k1i
+)
+ 
+[09:16:03 09-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 2 
