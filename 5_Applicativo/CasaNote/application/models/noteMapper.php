@@ -1,11 +1,11 @@
 <?php
 
 namespace models;
-require_once "Note.php";
+require_once "note.php";
 namespace models;
-require_once "Note.php";
+require_once "note.php";
 
-class NoteMapper
+class noteMapper
 {
     private $validator;
     private $connection;
@@ -13,7 +13,7 @@ class NoteMapper
     public function __construct()
     {
         require_once "application/libs/validator.php";
-        $this->validator = new \Validator();
+        $this->validator = new \validator();
         $this->connection = new \mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
 
@@ -33,7 +33,7 @@ class NoteMapper
         $allNote = [];
     
         while ($line = $result->fetch_assoc()) {
-            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
+            $note = new note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
             $allNote[] = $note;
         }
     
@@ -41,7 +41,7 @@ class NoteMapper
     }
     
 
-    public function addNote(Note $note)
+    public function addNote(note $note)
     {
         session_start();
         $title = $note->getTitle();
@@ -56,7 +56,7 @@ class NoteMapper
     }
     
 
-    public function deleteNote(Note $note)
+    public function deleteNote(note $note)
     {
         session_start();
         $id = $note->getId();
@@ -72,7 +72,7 @@ class NoteMapper
     }
     
 
-    public function findById($key): ?Note
+    public function findById($key): ?note
     {
         session_start();
         $userId = $_SESSION['UserId'];
@@ -84,7 +84,7 @@ class NoteMapper
         $stmt->close();
     
         if ($line = $result->fetch_assoc()) {
-            return new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
+            return new note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
         } else {
             return null;
         }
@@ -105,7 +105,7 @@ class NoteMapper
         $allNote = [];
     
         while ($line = $result->fetch_assoc()) {
-            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
+            $note = new note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
             $allNote[] = $note;
         }
     
@@ -113,7 +113,7 @@ class NoteMapper
     }
     
 
-    public function updateNote(Note $noteToUpdate, Note $newNote)
+    public function updateNote(note $noteToUpdate, note $newNote)
     {
         session_start();
         $id = $noteToUpdate->getId();
@@ -147,7 +147,7 @@ class NoteMapper
     
         $allNote = [];
         while ($line = $result->fetch_assoc()) {
-            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
+            $note = new note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
             $allNote[] = $note;
         }
     

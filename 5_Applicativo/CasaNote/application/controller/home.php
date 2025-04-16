@@ -14,8 +14,8 @@ class home
 
     public function __construct()
     {
-        require 'application/models/NoteMapper.php';
-        $this->noteMapper = new \models\NoteMapper();
+        require 'application/models/noteMapper.php';
+        $this->noteMapper = new \models\noteMapper();
     }
 
     public function main()
@@ -38,7 +38,7 @@ class home
     public function filter()
     {
         session_start();
-        $this->noteMapper = new \models\NoteMapper();
+        $this->noteMapper = new \models\noteMapper();
 
         if (isset($_POST['field']) && !empty($_POST['field'])) {
             $field = trim($_POST['field']);

@@ -1,6 +1,6 @@
 <?php
 // per non far dare errore all'IDE
-/* @var $note \models\Note */
+/* @var $note \models\note */
 include 'application/views/_templates/static/js/manageInput.php';
 
 ?>

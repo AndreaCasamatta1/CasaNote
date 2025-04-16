@@ -2,7 +2,7 @@
 
 namespace models;
 
-class Attachment
+class attachment
 {
     private $id;
     private $fileName;

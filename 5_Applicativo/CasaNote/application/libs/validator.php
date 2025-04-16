@@ -3,7 +3,7 @@
 /**
  * Classe utile per la Validazione dei dati.
  */
-class Validator
+class validator
 {
 
     function checkPosition($val)

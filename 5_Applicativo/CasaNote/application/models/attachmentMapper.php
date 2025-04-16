@@ -2,7 +2,7 @@
 
 namespace models;
 
-class AttachmentMapper
+class attachmentMapper
 {
     private $validator;
     private $connection;
@@ -10,7 +10,7 @@ class AttachmentMapper
     public function __construct()
     {
         require_once "application/libs/validator.php";
-        $this->validator = new \Validator();
+        $this->validator = new \validator();
         $this->connection = new \mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
     public function saveAttachmentToDatabase($fileName, $filePath, $mimeType, $noteId, $attachmentType)

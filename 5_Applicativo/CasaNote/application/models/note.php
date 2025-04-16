@@ -2,7 +2,7 @@
 
 namespace models;
 
-class Note
+class note
 {
     private $id;
     private $title;

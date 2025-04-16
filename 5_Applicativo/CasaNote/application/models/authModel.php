@@ -1,6 +1,6 @@
 <?php
 
-class AuthModel
+class authModel
 {
     private $conn;
     private $statement;
@@ -24,7 +24,7 @@ class AuthModel
         $user = $result->fetch_assoc();
 
         if ($user) {
-            logger::info("User info found: " . print_r($user, true));
+            logger::info("user info found: " . print_r($user, true));
             return $user;
         } else {
             return null;

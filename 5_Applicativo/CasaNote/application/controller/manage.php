@@ -8,15 +8,14 @@ class manage
     private $attachmentMapper;
     function __construct()
     {
-        require_once "application/models/Note.php";
-        require_once "application/models/NoteMapper.php";
-        $this->noteMapper = new \models\NoteMapper();
-        require_once "application/libs/Validator.php";
-        $this->validator = new Validator();
-//        require "application/views/_templates/footer.php";
-        require_once "application/models/Attachment.php";
-        require_once "application/models/AttachmentMapper.php";
-        $this->attachmentMapper = new \models\AttachmentMapper();
+        require_once "application/models/note.php";
+        require_once "application/models/noteMapper.php";
+        $this->noteMapper = new \models\noteMapper();
+        require_once "application/libs/validator.php";
+        $this->validator = new validator();
+        require_once "application/models/attachment.php";
+        require_once "application/models/attachmentMapper.php";
+        $this->attachmentMapper = new \models\attachmentMapper();
     }
 
     function index()
@@ -63,7 +62,7 @@ class manage
                 $data_last_update = date('Y-m-d H:i:s');
                 if ($noteToUpdate) {
                     $userId = $_SESSION['UserId'];
-                    $newNote = new \models\Note($id, $title, $noteToUpdate->getDateCreation(), $data_last_update, $userId);
+                    $newNote = new \models\note($id, $title, $noteToUpdate->getDateCreation(), $data_last_update, $userId);
                     if ($this->noteMapper->updateNote($noteToUpdate, $newNote)) {
                         header('location:' . URL . 'home/resetFilter');
                         exit();
@@ -79,7 +78,7 @@ class manage
                 $data_creation = date('Y-m-d H:i:s');
                 $data_last_update = date('Y-m-d H:i:s');
                 $userId = $_SESSION['UserId'];
-                $note = new \models\Note(null, $title, $data_creation, $data_last_update, $userId);
+                $note = new \models\note(null, $title, $data_creation, $data_last_update, $userId);
                 if ($this->noteMapper->addNote($note)) {
                     header('location:' . URL . 'home/resetFilter');
                     exit();

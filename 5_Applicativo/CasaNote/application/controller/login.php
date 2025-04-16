@@ -9,9 +9,9 @@ class login
     public function __construct()
     {
         require_once "application/libs/validator.php";
-        $this->validator = new Validator();
-        require_once "application/models/AuthModel.php";
-        $this->authModel = new AuthModel();
+        $this->validator = new validator();
+        require_once "application/models/authModel.php";
+        $this->authModel = new authModel();
     }
 
     public function index()
