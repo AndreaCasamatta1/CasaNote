@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class user
 {
     private $authModel;
@@ -21,7 +21,6 @@ class user
     }
     public function updateName()
     {
-        session_start();
         if (isset($_POST['newName'])) {
             $newName = $_POST['newName'];
             $userId = $_SESSION['UserId'];
@@ -37,7 +36,7 @@ class user
     }
     public function updatePassword()
     {
-        session_start();
+
         if (isset($_POST['oldPassword'], $_POST['newPassword']) && isset($_SESSION['UserId'])) {
             $oldPassword = $_POST['oldPassword'];
             $newPassword = $_POST['newPassword'];
@@ -54,7 +53,6 @@ class user
     }
     public function deleteAccount()
     {
-        session_start();
         if (isset($_SESSION['UserId'])) {
             $userId = $_SESSION['UserId'];
 
