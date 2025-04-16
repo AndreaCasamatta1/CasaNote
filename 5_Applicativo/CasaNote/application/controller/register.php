@@ -1,4 +1,5 @@
 <?php
+session_start();
 class register
 {
     private $validator;
@@ -21,7 +22,6 @@ class register
 
     public function register()
     {
-        session_start();
         if (isset($_POST['register'])) {
             require_once 'application/libs/validator.php';
             $name = $this->validator->sanitizeInput($_POST['name']);
