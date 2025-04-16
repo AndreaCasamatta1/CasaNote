@@ -112,3 +112,25 @@
 [10:23:31 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
 [10:23:41 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [79] : [INFO] - Email gia usata 
 [10:23:41 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[10:40:29 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [79] : [INFO] - Email gia usata 
+[10:40:29 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[10:40:32 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [79] : [INFO] - Email gia usata 
+[10:40:32 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - N/A 
+[10:40:37 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[10:40:37 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [27] : [INFO] - User info found: Array
+(
+    [id] => 7
+    [email] => f@g.com
+    [username] => MasterChick97
+    [password] => $2y$10$SNrc9Kf.tZUwVxvtZIDmUeIJDmVlU/B/RaDSLHTLd.YO3EwAqWJjm
+)
+ 
+[10:40:37 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 7
+    [email] => f@g.com
+    [username] => MasterChick97
+    [password] => $2y$10$SNrc9Kf.tZUwVxvtZIDmUeIJDmVlU/B/RaDSLHTLd.YO3EwAqWJjm
+)
+ 
+[10:40:37 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 7 
