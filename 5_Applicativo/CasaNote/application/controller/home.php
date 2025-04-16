@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 class home
 {
@@ -7,9 +7,9 @@ class home
 
     public function index()
     {
-        require 'application/views/_templates/navbar.php';
-        require 'application/views/_templates/header.php';
-        require 'application/views/home/index.php';
+        require_once 'application/views/_templates/navbar.php';
+        require_once 'application/views/_templates/header.php';
+        require_once 'application/views/home/index.php';
     }
 
     public function __construct()
@@ -37,7 +37,6 @@ class home
 
     public function filter()
     {
-        session_start();
         $this->noteMapper = new \models\noteMapper();
 
         if (isset($_POST['field']) && !empty($_POST['field'])) {
@@ -52,7 +51,6 @@ class home
 
     public function resetFilter()
     {
-        session_start();
         unset($_SESSION['filtered_notes']);
         unset($_SESSION['order_by_date']);
         $this->main();
@@ -80,7 +78,6 @@ class home
 
     public function sortByDate()
     {
-        session_start();
 
 
         if (isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc') {

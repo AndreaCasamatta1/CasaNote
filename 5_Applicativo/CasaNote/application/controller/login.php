@@ -1,6 +1,5 @@
 <?php
-
-
+session_start();
 class login
 {
     private $authModel;
@@ -23,7 +22,7 @@ class login
 
     public function logIn()
     {
-        session_start();
+
         if (isset($_POST['login'])) {
 
             require_once 'application/libs/validator.php';
@@ -51,7 +50,7 @@ class login
 
     public function logout()
     {
-        session_start();
+
         unset($_SESSION['UserId']);
 
         session_destroy();

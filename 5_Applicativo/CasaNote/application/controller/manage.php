@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class manage
 {
     private $noteMapper;
@@ -26,6 +26,7 @@ class manage
     function goToCreateNotePage($id = null)
     {
         $note = $this->noteMapper->findById($id);
+
         require 'application/views/_templates/navbar2.php';
         require "application/views/_templates/header.php";
         require "application/views/manage/createNote.php";

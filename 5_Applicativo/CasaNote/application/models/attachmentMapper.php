@@ -14,7 +14,7 @@ class attachmentMapper
         $this->connection = new \mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
     public function saveAttachmentToDatabase($fileName, $filePath, $mimeType, $noteId, $attachmentType)
-    {
+    { \logger::info("Entrato in funzione SQL");
         $query = "INSERT INTO attachment (nome_file, percorso_file, mime_type, note_id)
               VALUES (:nome_file, :percorso_file, :mime_type, :note_id)";
         $stmt = $this->db->prepare($query);

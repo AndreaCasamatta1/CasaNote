@@ -60,7 +60,7 @@ if (!isset($allNote)) {
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px;">
                                     <span><?php echo "Ultimo Aggiornamento: " . $single->getDateLastUpdate(); ?></span>
                                     <div>
-                                        <a href="<?php echo URL . 'manage/deleteNote/' . $single->getId(); ?>" class="btn btn-danger" onclick="return confirm('Sicuro?')">x</a>
+                                        <a href="<?php echo URL . 'manage/deleteNote/' . $single->getId(); ?>" class="btn btn-danger" onclick="return confirm('Sicuro di eliminare la nota?')">x</a>
                                         <a href="<?php echo URL . 'manage/goToCreateNotePage/' . $single->getId(); ?>" class="btn btn-primary" style="margin-left: 10px;">aggiorna</a>
                                     </div>
                                 </div>
