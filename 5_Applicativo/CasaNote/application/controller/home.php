@@ -20,6 +20,7 @@ class home
 
     public function main()
     {
+
         if (isset($_SESSION['order_by_date'])) {
             $order = $_SESSION['order_by_date'];
         } else {

@@ -24,7 +24,7 @@ class AuthModel
         $user = $result->fetch_assoc();
 
         if ($user) {
-            Logger::info("User info found: " . print_r($user, true));
+            logger::info("User info found: " . print_r($user, true));
             return $user;
         } else {
             return null;
@@ -44,11 +44,11 @@ class AuthModel
         $result = $this->statement->get_result();
         $user = $result->fetch_assoc();
 
-        Logger::info("Verifica utente: " . print_r($user, true));
+        logger::info("Verifica utente: " . print_r($user, true));
 
         // Verifica la password
         if ($user && password_verify($password, $user['password'])) {
-            Logger::info("Password verificata per l'utente: " . $user['username']);
+            logger::info("Password verificata per l'utente: " . $user['username']);
             return $user;
         } else {
             return null;
@@ -76,7 +76,7 @@ class AuthModel
             if ($this->statement->affected_rows > 0) {
                 return true;
             } else {
-                Logger::info("Email gia usata");
+                logger::info("Email gia usata");
                 return null;
             }
         } else {

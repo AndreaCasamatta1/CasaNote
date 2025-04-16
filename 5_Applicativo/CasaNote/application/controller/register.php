@@ -34,17 +34,17 @@ class register
                 exit();
             }
             $result = $this->authModel->registerUser($name, $email, $password, $password_confirm);
-            Logger::info($result);
+            logger::info($result);
             if ($result) {
                 $idUser = $this->authModel->getUserInfo($email);
-                Logger::info('Dati restituiti da getData: ' . print_r($idUser, true));
+                logger::info('Dati restituiti da getData: ' . print_r($idUser, true));
                 if($idUser) {
                     $_SESSION["UserId"] = $idUser['id'];
-                    Logger::info("ID utente salvato nella sessione: " . $_SESSION["UserId"]);
+                    logger::info("ID utente salvato nella sessione: " . $_SESSION["UserId"]);
                     header("Location:" . URL . "home/main");
                     exit();
                 } else {
-                    Logger::error("Errore: utente non trovato, password errata o email gia in uso.");
+                    logger::error("Errore: utente non trovato, password errata o email gia in uso.");
                     require_once 'application/views/_templates/error.php';
                     $this->index();
                     exit();

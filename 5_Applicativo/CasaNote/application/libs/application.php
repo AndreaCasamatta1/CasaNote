@@ -1,5 +1,5 @@
 <?php
-include_once 'Logger.php';
+include_once 'logger.php';
 
 class Application
 {

@@ -12,12 +12,12 @@
  * - single file
  * - singleton pattern
  * - six log levels (info, notice, debug, warning, error, fatal)
- * - logs the line where the Logger method is executed (good for troubleshooting)
+ * - logs the line where the logger method is executed (good for troubleshooting)
  * - logs the relative filepath of the source file, not the required one (good for troubleshooting)
  *
  */
 
-class Logger
+class logger
 {
 
     /**

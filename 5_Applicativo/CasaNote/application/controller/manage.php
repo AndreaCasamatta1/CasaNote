@@ -100,34 +100,34 @@ class manage
 
             if ($noteId === null) {
                 echo json_encode(['success' => false, 'message' => 'Nota non trovata']);
-                Logger::error('Nota non trovata');
+                logger::error('Nota non trovata');
                 exit();
             }
-            Logger::info('id ' . $noteId);
+            logger::info('id ' . $noteId);
             $noteFolder = "uploads/note_{$noteId}";
             if (!file_exists($noteFolder)) {
                 mkdir($noteFolder, 0777, true);
-                Logger::info('Cartella creata' . $noteFolder);
+                logger::info('Cartella creata' . $noteFolder);
             }
 
             switch ($attachmentType) {
                 case 'file':
-                    Logger::info('Tipo di Attchment : File');
+                    logger::info('Tipo di Attchment : File');
                     if (isset($_FILES['attachment_file']) && $_FILES['attachment_file']) {
                         $fileName = basename($_FILES['attachment_file']['name']);
                         $filePath = $noteFolder . '/' . $fileName;
-                        Logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
+                        logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
                         if (move_uploaded_file($_FILES['attachment_file']['tmp_name'], $filePath)) {
                             $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, $_FILES['attachment_file']['type'], $noteId, 'file');
-                            Logger::info('salvataggio file');
+                            logger::info('salvataggio file');
                             echo json_encode(['success' => true]);
                         } else {
                             echo json_encode(['success' => false, 'message' => 'Errore nel caricamento del file']);
-                            Logger::error('Errore nel caricamento del file');
+                            logger::error('Errore nel caricamento del file');
                         }
                     } else {
                         echo json_encode(['success' => false, 'message' => 'Nessun file caricato']);
-                        Logger::error('Nessun file caricato');
+                        logger::error('Nessun file caricato');
                     }
                     break;
                 case 'text':
@@ -137,16 +137,16 @@ class manage
                         $textContent = $_POST['attachment_content'];
                         $fileName = "testo_{$noteId}" . "-" . $timestamp . ".txt";
                         $filePath = $noteFolder . '/' . $fileName;
-                        Logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
+                        logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
                         file_put_contents($filePath, $textContent);
                         $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, 'text/plain', $noteId, 'text');
                         echo json_encode(['success' => true]);
-                        Logger::info($fileName . " " . $filePath . " salvato");
+                        logger::info($fileName . " " . $filePath . " salvato");
 
                         $_SESSION['countFiletxt'] = $this->countFiletxt;  // Salva il nuovo valore del contatore nella sessione
                     } else {
                         echo json_encode(['success' => false, 'message' => 'Nessun testo fornito']);
-                        Logger::error($this->fileName . " " . $this->filePath . " fallito salvataggio");
+                        logger::error($this->fileName . " " . $this->filePath . " fallito salvataggio");
                     }
                     break;
                 case 'draw':
