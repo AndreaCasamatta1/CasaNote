@@ -171,15 +171,5 @@ class manage
             echo json_encode(['success' => false, 'message' => 'Tipo di allegato mancante']);
         }
     }
-    function generateRandomNumber($min,$max) {
-        static $arrayNumeri = [];
-
-        do {
-            $numero = rand($min, $max);
-        } while (in_array($numero, $arrayNumeri));
-
-        $arrayNumeri[] = $numero;
-        return $numero;
-    }
 }
 

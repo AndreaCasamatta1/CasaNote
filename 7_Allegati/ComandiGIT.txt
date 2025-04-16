@@ -1,0 +1,3 @@
+git push origin develop --force --> nel caso il push non vada e vogliamo forzarlo, 
+⚠️ Warning: This will overwrite history on GitHub and might delete others' work if you're not careful.
+-----------

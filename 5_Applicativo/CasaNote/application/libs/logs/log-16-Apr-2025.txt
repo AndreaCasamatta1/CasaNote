@@ -81,3 +81,13 @@
 )
  
 [09:29:21 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/models/AuthModel.php] [51] : [INFO] - Password verificata per l'utente: MasterChick97 
+[09:41:02 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [106] : [INFO] - id 8 
+[09:41:36 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [106] : [INFO] - id 9 
+[09:41:36 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [110] : [INFO] - Cartella creatauploads/note_9 
+[09:41:36 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [140] : [INFO] - POST DATA: uploads/note_9/testo_9-2025-04-16_09-41-36.txt testo_9-2025-04-16_09-41-36.txt 
+[09:41:38 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [106] : [INFO] - id 9 
+[09:41:38 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [115] : [INFO] - Tipo di Attchment : File 
+[09:41:38 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [119] : [INFO] - POST DATA: uploads/note_9/images.jpg images.jpg 
+[09:41:39 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [106] : [INFO] - id 9 
+[09:41:39 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [115] : [INFO] - Tipo di Attchment : File 
+[09:41:39 16-Apr-2025] [localhost/Progetto_CasaNote/5_Applicativo/CasaNote/application/controller/manage.php] [119] : [INFO] - POST DATA: uploads/note_9/images.jpg images.jpg 
