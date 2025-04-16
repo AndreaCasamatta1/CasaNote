@@ -1,0 +1,42 @@
+[16:10:06 10-Apr-2025] [localhost/CasaNote/application/controller/register.php] [37] : [INFO] - 1 
+[16:10:06 10-Apr-2025] [localhost/CasaNote/application/models/AuthModel.php] [27] : [INFO] - User info found: Array
+(
+    [id] => 1
+    [email] => fd@gmail.com
+    [username] => fd
+    [password] => $2y$10$01HGdcdBJEW4z3CRULMc1OEPxeis6kdPaOHOr7LqCK7.SMlDzezfG
+)
+ 
+[16:10:06 10-Apr-2025] [localhost/CasaNote/application/controller/register.php] [40] : [INFO] - Dati restituiti da getData: Array
+(
+    [id] => 1
+    [email] => fd@gmail.com
+    [username] => fd
+    [password] => $2y$10$01HGdcdBJEW4z3CRULMc1OEPxeis6kdPaOHOr7LqCK7.SMlDzezfG
+)
+ 
+[16:10:06 10-Apr-2025] [localhost/CasaNote/application/controller/register.php] [43] : [INFO] - ID utente salvato nella sessione: 1 
+[16:10:28 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 7 
+[16:10:28 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [108] : [INFO] - Cartella creatauploads/note_7 
+[16:10:28 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [138] : [INFO] - POST DATA: uploads/note_7/testo_7-2025-04-10_16-10-28.txt testo_7-2025-04-10_16-10-28.txt 
+[16:10:28 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 7 
+[16:10:28 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [138] : [INFO] - POST DATA: uploads/note_7/testo_7-2025-04-10_16-10-28.txt testo_7-2025-04-10_16-10-28.txt 
+[16:10:29 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 7 
+[16:10:29 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [138] : [INFO] - POST DATA: uploads/note_7/testo_7-2025-04-10_16-10-29.txt testo_7-2025-04-10_16-10-29.txt 
+[16:11:35 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 8 
+[16:11:35 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [138] : [INFO] - POST DATA: uploads/note_8/testo_8-2025-04-10_16-11-35.txt testo_8-2025-04-10_16-11-35.txt 
+[16:11:36 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 8 
+[16:11:36 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [138] : [INFO] - POST DATA: uploads/note_8/testo_8-2025-04-10_16-11-36.txt testo_8-2025-04-10_16-11-36.txt 
+[16:11:57 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 9 
+[16:11:58 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [108] : [INFO] - Cartella creatauploads/note_9 
+[16:11:58 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [113] : [INFO] - Tipo di Attchment : File 
+[16:11:58 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [117] : [INFO] - POST DATA: uploads/note_9/I3_I3BB.png I3_I3BB.png 
+[16:11:58 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 9 
+[16:11:58 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [113] : [INFO] - Tipo di Attchment : File 
+[16:11:58 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [117] : [INFO] - POST DATA: uploads/note_9/I3_I3BB.png I3_I3BB.png 
+[16:12:01 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 9 
+[16:12:01 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [113] : [INFO] - Tipo di Attchment : File 
+[16:12:01 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [117] : [INFO] - POST DATA: uploads/note_9/I3_I3BB.png I3_I3BB.png 
+[16:21:26 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [104] : [INFO] - id 1 
+[16:21:26 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [108] : [INFO] - Cartella creatauploads/note_1 
+[16:21:26 10-Apr-2025] [localhost/CasaNote/application/controller/manage.php] [138] : [INFO] - POST DATA: uploads/note_1/testo_1-2025-04-10_16-21-26.txt testo_1-2025-04-10_16-21-26.txt 

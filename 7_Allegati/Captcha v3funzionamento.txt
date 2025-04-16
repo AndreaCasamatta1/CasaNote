@@ -1,0 +1,59 @@
+**Dettagli sul funzionamento di CAPTCHA v3**
+
+CAPTCHA v3 è un sistema sviluppato per distinguere tra utenti umani e bot senza interrompere l'esperienza dell'utente.
+ Funziona in modo passivo e si basa su un **sistema di scoring** (punteggio) anziché su sfide visive. Ecco una spiegazione dettagliata con uno schema logico:
+
+---
+
+### **Come funziona CAPTCHA v3**
+
+1. **Analisi del comportamento**:
+   - Quando un utente visita un sito che utilizza CAPTCHA v3, il sistema inizia a monitorare il suo comportamento.
+   - Analizza parametri come:
+     - Tempo trascorso sulla pagina.
+     - Movimenti del mouse.
+     - Pattern di clic.
+     - Dati di navigazione precedenti.
+
+2. **Generazione di un punteggio**:
+   - CAPTCHA v3 genera un punteggio che varia da 0.0 a 1.0:
+     - Un punteggio vicino a **0.0** indica un'alta probabilità che si tratti di un bot.
+     - Un punteggio vicino a **1.0** suggerisce che si tratta di un utente umano.
+
+3. **Invio del token al server**:
+   - Una volta completata l'analisi, viene generato un token criptato che include il punteggio e altri metadati.
+   - Il token viene inviato al server del sito tramite un modulo HTML o una richiesta API.
+
+4. **Verifica lato server**:
+   - Il server invia il token al servizio di verifica di Google reCAPTCHA.
+   - Google restituisce una risposta JSON che include:
+     - `success`: se il token è valido.
+     - `score`: il punteggio generato.
+     - `action`: l'azione specifica legata alla richiesta (ad esempio "login").
+     - `error-codes`: eventuali errori (se presenti).
+
+5. **Gestione della risposta**:
+   - Il webmaster configura come trattare l'utente in base al punteggio:
+     - Utente con punteggio alto: autorizzato.
+     - Utente con punteggio basso: bloccato o sottoposto a ulteriori verifiche (ad esempio CAPTCHA visivi o email di conferma).
+
+---
+
+### **Schema logico di funzionamento**
+
+```plaintext
+UTENTE → Interazione con il sito → Analisi del comportamento → Generazione del punteggio
+       ↘ Token generato e inviato ↘    ↘ Server verifica token (Google reCAPTCHA)
+                                       ↘ Risultati del punteggio → Azione decisa dal server
+```
+
+---
+
+**Punti chiave distintivi**:
+- **Nessuna interazione visiva**: CAPTCHA v3 si integra senza interrompere l'esperienza dell'utente.
+- **Punteggio dinamico**: Aiuta a personalizzare il modo in cui gestire gli utenti, invece di usare regole fisse.
+- **Uso delle API**: Consente di implementarlo facilmente su siti moderni.
+
+Questo approccio è particolarmente utile per proteggere moduli di login, registrazione, o aree sensibili del sito senza creare attriti per gli utenti autentici.
+
+Fammi sapere se desideri ulteriori dettagli su uno specifico passaggio! 😊

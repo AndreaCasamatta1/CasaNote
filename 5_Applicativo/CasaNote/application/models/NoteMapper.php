@@ -22,106 +22,135 @@ class NoteMapper
      */
     public function fetchAll(): array
     {
-        $selectNote = "SELECT * FROM note ORDER BY title ASC";
-        $note = $this->connection->query($selectNote);
-        $allNote = array();
-        foreach ($note as $line) {
-            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+        session_start();
+        $userId = $_SESSION['UserId'];
+        $selectNote = "SELECT * FROM note WHERE user_id = ? ORDER BY title ASC";
+        $stmt = $this->connection->prepare($selectNote);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $allNote = [];
+    
+        while ($line = $result->fetch_assoc()) {
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
             $allNote[] = $note;
-            unset($note);
         }
+    
         return $allNote;
     }
+    
 
     public function addNote(Note $note)
     {
+        session_start();
         $title = $note->getTitle();
         $dateCreation = $note->getDateCreation();
         $datelastUpdate = $note->getDateLastUpdate();
-
-        $addNote = "INSERT INTO note(title,date_creation,date_last_update) VALUES (?, ?, ?)";
+        $userId = $_SESSION['UserId'];
+    
+        $addNote = "INSERT INTO note(title, date_creation, date_last_update, user_id) VALUES (?, ?, ?, ?)";
         $stmt = $this->connection->prepare($addNote);
-        $stmt->bind_param("sss", $title, $dateCreation, $datelastUpdate); // Bind dei parametri
+        $stmt->bind_param("sssi", $title, $dateCreation, $datelastUpdate, $userId);
         return $stmt->execute();
     }
+    
 
     public function deleteNote(Note $note)
     {
+        session_start();
         $id = $note->getId();
-        $deleteNote = "DELETE FROM note WHERE id = ?";
-
+        $userId = $_SESSION['UserId'];
+    
+        $deleteNote = "DELETE FROM note WHERE id = ? AND user_id = ?";
         $stmt = $this->connection->prepare($deleteNote);
-        $stmt->bind_param("i", $id); // Bind dell'ID come intero
+        $stmt->bind_param("ii", $id, $userId); // ID nota e ID utente
         $result = $stmt->execute();
         $stmt->close();
-
+    
         return $result;
     }
+    
 
     public function findById($key): ?Note
     {
-        $selectNote = "SELECT * FROM note WHERE id = ?";
-
+        session_start();
+        $userId = $_SESSION['UserId'];
+        $selectNote = "SELECT * FROM note WHERE id = ? AND user_id = ?";
         $stmt = $this->connection->prepare($selectNote);
-        $stmt->bind_param("i", $key);
+        $stmt->bind_param("ii", $key, $userId);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-
+    
         if ($line = $result->fetch_assoc()) {
-            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
-            return $note;
+            return new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
         } else {
-            return null; // nota non esiste, restituisce null
+            return null;
         }
     }
+    
 
     public function getAllFiltered($field): array
     {
-        $selectNote = "SELECT * FROM note WHERE title LIKE ?";
+        session_start();
+        $userId = $_SESSION['UserId'];
+        $selectNote = "SELECT * FROM note WHERE user_id = ? AND title LIKE ?";
         $stmt = $this->connection->prepare($selectNote);
         $searchTerm = "%$field%";
-        $stmt->bind_param("s", $searchTerm);
+        $stmt->bind_param("is", $userId, $searchTerm);
         $stmt->execute();
-
+    
         $result = $stmt->get_result();
         $allNote = [];
-
+    
         while ($line = $result->fetch_assoc()) {
-            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
             $allNote[] = $note;
         }
-
+    
         return $allNote;
     }
+    
 
     public function updateNote(Note $noteToUpdate, Note $newNote)
     {
+        session_start();
         $id = $noteToUpdate->getId();
-        $title = $newNote->getTitle(); // Corretto il nome della variabile
+        $title = $newNote->getTitle();
         $dateLastUpdate = $newNote->getDateLastUpdate();
-
-        // Preparazione della query di aggiornamento con i parametri legati
-        $updateNote = "UPDATE note SET title = ?, date_last_update = ? WHERE id = ?";
+        $userId = $_SESSION['UserId'];
+    
+        $updateNote = "UPDATE note SET title = ?, date_last_update = ? WHERE id = ? AND user_id = ?";
         $stmt = $this->connection->prepare($updateNote);
-        $stmt->bind_param("ssi", $title, $dateLastUpdate, $id); // Bind dei parametri
+        $stmt->bind_param("ssii", $title, $dateLastUpdate, $id, $userId);
         $result = $stmt->execute();
         $stmt->close();
-
+    
         return $result;
     }
+    
 
     public function fetchAllSortedByDate($order = 'asc')
     {
-
-        $selectNote = "SELECT * FROM note ORDER BY date_last_update " . ($order === 'desc' ? 'DESC' : 'ASC') . ", date_creation " . ($order === 'desc' ? 'DESC' : 'ASC');
-        $result = $this->connection->query($selectNote);
+        session_start();
+        $userId = $_SESSION['UserId'];
+    
+        $selectNote = "SELECT * FROM note WHERE user_id = ? ORDER BY date_last_update " . 
+            ($order === 'desc' ? 'DESC' : 'ASC') . ", date_creation " . 
+            ($order === 'desc' ? 'DESC' : 'ASC');
+    
+        $stmt = $this->connection->prepare($selectNote);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
         $allNote = [];
         while ($line = $result->fetch_assoc()) {
-            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update']);
+            $note = new Note($line['id'], $line['title'], $line['date_creation'], $line['date_last_update'], $line['user_id']);
             $allNote[] = $note;
         }
-
+    
         return $allNote;
     }
 
@@ -134,5 +163,6 @@ class NoteMapper
         }
         return null;
     }
+    
 
 }

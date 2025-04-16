@@ -62,7 +62,8 @@ class manage
                 $noteToUpdate = $this->noteMapper->findById($id);
                 $data_last_update = date('Y-m-d H:i:s');
                 if ($noteToUpdate) {
-                    $newNote = new \models\Note($id, $title, $noteToUpdate->getDateCreation(), $data_last_update);
+                    $userId = $_SESSION['UserId'];
+                    $newNote = new \models\Note($id, $title, $noteToUpdate->getDateCreation(), $data_last_update, $userId);
                     if ($this->noteMapper->updateNote($noteToUpdate, $newNote)) {
                         header('location:' . URL . 'home/resetFilter');
                         exit();
@@ -77,7 +78,8 @@ class manage
                 $title = $this->validator->sanitizeInput($_POST['title']);
                 $data_creation = date('Y-m-d H:i:s');
                 $data_last_update = date('Y-m-d H:i:s');
-                $note = new \models\Note(null, $title, $data_creation, $data_last_update);
+                $userId = $_SESSION['UserId'];
+                $note = new \models\Note(null, $title, $data_creation, $data_last_update, $userId);
                 if ($this->noteMapper->addNote($note)) {
                     header('location:' . URL . 'home/resetFilter');
                     exit();

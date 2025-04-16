@@ -7,21 +7,33 @@ class Note
     private $id;
     private $title;
     private $dateCreation;
-
-
     private $dateLastUpdate;
+    private $userId;
 
     /**
      * @param $title
      * @param $dateCreation
      * @param $dateLastUpdate
      */
-    public function __construct($id,$title, $dateCreation, $dateLastUpdate)
+
+
+    public function __construct($id, $title, $dateCreation, $dateLastUpdate, $userId)
     {
         $this->id = $id;
         $this->title = $title;
         $this->dateCreation = $dateCreation;
         $this->dateLastUpdate = $dateLastUpdate;
+        $this->userId = $userId;
+    }
+    
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+    
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
     }
 
     /**
