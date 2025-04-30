@@ -25,8 +25,8 @@
                 Password
                 <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                    title="• Deve essere lunga almeno 6 caratteri
-                 • Deve contenere almeno una maiuscola, una minuscola e un numero
-                 • Deve contenere caratteri speciali"
+                 • Deve contenere almeno 1 maiuscola, 1 minuscola e 1 numero
+                 • Deve contenere almeno 1 carattere speciale"
                    style="cursor: pointer; margin-left: 8px;">
                 </i>
                 </label>
@@ -45,7 +45,7 @@
 
     </div>
 </div>
-<!-- Inizializza il Tooltip Usato AI -->
+<!-- Inizializza il Tooltip https://stackoverflow.com/questions/50017486/bootstrap-tooltip-is-not-working-on-my-web-project -->
 <script>
     $(document).ready(function() {
         // Attiva il tooltip su tutti gli elementi con data-toggle="tooltip"
