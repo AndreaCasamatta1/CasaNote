@@ -4,11 +4,16 @@ class authModel
 {
     private $conn;
     private $statement;
+    private $security;
 
     public function __construct()
     {
+        require_once "application/libs/security.php";
         $this->conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
+        $this->security = new \libs\security();
     }
+
+    // 1. getUserInfo Method
     public function getUserInfo($email)
     {
 

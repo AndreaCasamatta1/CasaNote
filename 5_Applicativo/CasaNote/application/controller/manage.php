@@ -171,5 +171,62 @@ class manage
             echo json_encode(['success' => false, 'message' => 'Tipo di allegato mancante']);
         }
     }
+    public function zip($id = null)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ($id !== null) {
+                $notaName = "note_{$id}";
+                logger::info('nome nota: ' . $notaName);
+                $zipFileName = "{$notaName}.zip";
+                logger::info('nome cartella: ' . $zipFileName);
+                $zip = new ZipArchive();
+                $zipPath = 'application/tmp/' . $zipFileName;
+                logger::info('zip path: ' . $zipPath);
+
+                //fa parte di un'operazione di apertura (e creazione, se necessario) di un file ZIP utilizzando la classe ZipArchive in PHP.
+                //ZipArchive::CREATE è un flag che indica che, se il file ZIP non esiste, deve essere creato.
+                // Se il file esiste già, verrà aperto per essere modificato.
+                //La funzione open() tenta di aprire il file ZIP e restituirà TRUE se l'operazione è riuscita. Se l'apertura del file fallisce, restituirà FALSE.
+                if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
+                    $directory = 'uploads/' . $notaName;
+                    logger::info('directory in uploads: ' . $notaName);
+
+                    //La funzione glob() restituirà un array con i nomi di tutti i file e le cartelle che si trovano in quella directory.
+                    //$directory è una variabile che contiene il percorso della directory in cui stai cercando.
+                    //
+                    //'/*' è il pattern di ricerca
+                    $files = glob($directory . '/*');
+                    logger::info('files: ' . $files);
+                    foreach ($files as $file) {
+                        $zip->addFile($file, basename($file));
+                    }
+                    $zip->close();
+                    //Imposta l'intestazione HTTP per indicare che il contenuto che stai inviando è un file ZIP.
+                    // In questo caso, il browser capirà che il file è di tipo application/zip, ossia un file compresso
+                    // in formato ZIP.
+                    header('Content-Type: application/zip');
+                    //Imposta l'intestazione HTTP per indicare che il file dovrebbe essere scaricato invece che visualizzato nel browser.
+                    // La parte filename="' . $zipFileName . '"' specifica il nome che il file avrà quando verrà scaricato. $zipFileName
+                    // è una variabile che contiene il nome del file ZIP.
+                    header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
+                    //Imposta l'intestazione Content-Length, che comunica al browser la dimensione del file che si sta per scaricare.
+                    // $zipPath è il percorso del file ZIP, e filesize($zipPath) restituisce la sua dimensione in byte.
+                    //Questo aiuta a determinare la durata del download e permette al browser
+                    // di gestire correttamente il processo di scaricamento (come visualizzare la barra di avanzamento).
+                    header('Content-Length: ' . filesize($zipPath));
+                    //Legge il file ZIP dal server e lo invia al browser.
+                    // Questa funzione legge il contenuto del file specificato in $zipPath e lo invia direttamente all'output (il browser, in questo caso).
+                    //Momento del trasferimento
+                    readfile($zipPath);
+                    //Dopo che il file è stato inviato al browser, questa funzione elimina il file dal server.
+                    // In questo caso, viene rimosso il file ZIP creato temporaneamente, una volta che è stato scaricato dall'utente,
+                    // per evitare di lasciare file inutili sul server.
+                    unlink($zipPath);
+                } else {
+                    echo "Impossibile creare il file ZIP.";
+                }
+            }
+        }
+    }
 }
 

@@ -25,6 +25,7 @@ class user
     {
         if (isset($_POST['newName'])) {
             $newName = $_POST['newName'];
+            $_SESSION['name'] = $newName;
             $userId = $_SESSION['UserId'];
             logger::info($userId);
             if ($this->authModel->updateName($userId, $newName)) {

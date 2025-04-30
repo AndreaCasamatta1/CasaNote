@@ -3,7 +3,7 @@ session_start();
 
 class home
 {
-    public $noteMapper;
+    private $noteMapper;
 
     public function index()
     {

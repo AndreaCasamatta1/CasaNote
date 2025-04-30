@@ -38,3 +38,6 @@ include 'application/views/_templates/static/js/manageInput.php';
     <br><br>
     <div id="dynamic-fields"></div>
 </form>
+<form method="POST" action="<?php echo URL; ?>manage/zip<?php if (isset($note)): echo '/' . $note->getId(); endif; ?>">
+    <button class="btn btn-info" id="zipForm" type="submit">Esporta ZIP</button>
+</form>

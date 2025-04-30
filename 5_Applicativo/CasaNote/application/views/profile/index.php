@@ -1,7 +1,7 @@
 <div class="col d-flex justify-content-center">
-<h4>Nome attuale: <strong>
-        <?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Nome non disponibile'; ?>
-    </strong></h4>
+    <h4>Nome attuale: <strong>
+            <?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Nome non disponibile'; ?>
+        </strong></h4>
 
 </div>
 <br>
