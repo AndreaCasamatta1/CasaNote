@@ -1,5 +1,21 @@
 <div class="col d-flex justify-content-center">
+<h4>Nome attuale: <strong>
+        <?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Nome non disponibile'; ?>
+    </strong></h4>
+
+</div>
+<br>
+<div class="col d-flex justify-content-center">
+    <h4>Email: <strong>
+            <?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : 'Email non disponibile'; ?>
+        </strong></h4>
+
+</div>
+
+<div class="col d-flex justify-content-center">
+
     <div class="card card-bordered mt-4 p-2" style="width: 18rem;">
+        <br>
         <form method="POST" action="<?php echo URL; ?>user/updateName">
             <h2>Modifica Nome</h2>
             <br>
@@ -12,7 +28,6 @@
         </form>
     </div>
 </div>
-
 <div class="col d-flex justify-content-center">
     <div class="card card-bordered mt-4 p-2" style="width: 18rem;">
         <form method="POST" action="<?php echo URL; ?>user/updatePassword">

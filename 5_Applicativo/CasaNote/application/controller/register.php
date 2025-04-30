@@ -47,10 +47,12 @@ class register
             $result = $this->authModel->registerUser($name, $email, $password, $password_confirm);
             logger::info($result);
             if ($result) {
-                $idUser = $this->authModel->getUserInfo($email);
-                logger::info('Dati restituiti da getData: ' . print_r($idUser, true));
-                if($idUser) {
-                    $_SESSION["UserId"] = $idUser['id'];
+                $result = $this->authModel->getUserInfo($email);
+                logger::info('Dati restituiti da getData: ' . print_r($result, true));
+                if($result) {
+                    $_SESSION["UserId"] = $result['id'];
+                    $_SESSION["name"] = $result['username'];
+                    $_SESSION["email"] = $result['email'];
                     logger::info("ID utente salvato nella sessione: " . $_SESSION["UserId"]);
                     header("Location:" . URL . "home/main");
                     exit();

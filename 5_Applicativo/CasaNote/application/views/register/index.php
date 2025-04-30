@@ -1,5 +1,4 @@
 <div class="col d-flex justify-content-center">
-
     <div class="card card-bordered mt-4 p-2" style="width: 18rem;">
         <form method="POST" action="<?php echo URL; ?>register/register">
 
@@ -45,7 +44,7 @@
 
     </div>
 </div>
-<!-- Inizializza il Tooltip https://stackoverflow.com/questions/50017486/bootstrap-tooltip-is-not-working-on-my-web-project -->
+<!-- Inizializza il Tooltip, fonte https://stackoverflow.com/questions/50017486/bootstrap-tooltip-is-not-working-on-my-web-project -->
 <script>
     $(document).ready(function() {
         // Attiva il tooltip su tutti gli elementi con data-toggle="tooltip"

@@ -37,6 +37,8 @@ class login
             $result = $this->authModel->verifyUser($email, $pass);
             if ($result) {
                 $_SESSION["UserId"] = $result['id'];
+                $_SESSION["name"] = $result['username'];
+                $_SESSION["email"] = $result['email'];
 
                 header("Location:" . URL . "home/main");
                 exit();
