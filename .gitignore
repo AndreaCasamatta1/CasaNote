@@ -1,0 +1,11 @@
+/5_Applicativo/CasaNote/.venv
+**/~$*.docx
+**/~$*.doc
+**/~*.tmp
+/5_Applicativo/CasaNote/controller/__pycache__
+/5_Applicativo/CasaNote/.idea/workspace.xml
+/5_Applicativo/CasaNote/.idea/php.xml
+/5_Applicativo/CasaNote/application/libs/logs/*
+
+
+
