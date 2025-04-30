@@ -25,7 +25,7 @@
                 <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                    title="• Deve essere lunga almeno 6 caratteri
                  • Deve contenere almeno 1 maiuscola, 1 minuscola e 1 numero
-                 • Deve contenere almeno 1 carattere speciale"
+                 • Deve contenere almeno 1 carattere speciale (non lettera , accentata è carattere speciale, e numero, @,$, à,è,(,&)"
                    style="cursor: pointer; margin-left: 8px;">
                 </i>
                 </label>
@@ -44,6 +44,7 @@
 
     </div>
 </div>
+
 <!-- Inizializza il Tooltip, fonte https://stackoverflow.com/questions/50017486/bootstrap-tooltip-is-not-working-on-my-web-project -->
 <script>
     $(document).ready(function() {
