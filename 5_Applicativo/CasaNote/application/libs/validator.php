@@ -44,9 +44,9 @@ class validator
         }
     }
     function validatePassword($password) {
-        $lunghezzaMinima = 6;
+        $minLength = 6;
 
-        if (strlen($password) < $lunghezzaMinima) {
+        if (strlen($password) < $minLength) {
             return false;
         }
         if (!preg_match('/[A-Z]/', $password)) {
