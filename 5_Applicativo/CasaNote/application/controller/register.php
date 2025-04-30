@@ -33,6 +33,17 @@ class register
                 $this->index();
                 exit();
             }
+            $passwordValidation = $this->validator->validatePassword($password);
+            if (!$passwordValidation) {
+                require_once 'application/views/_templates/error.php';
+                $this->index();
+                exit();
+            }
+            if ($password !== $password_confirm) {
+                require_once 'application/views/_templates/error.php';
+                $this->index();
+                exit();
+            }
             $result = $this->authModel->registerUser($name, $email, $password, $password_confirm);
             logger::info($result);
             if ($result) {

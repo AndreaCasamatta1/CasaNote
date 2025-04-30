@@ -21,11 +21,18 @@
                 <label for="email">Email</label>
                 <input type="text" name="email" class="form-control" id="email" placeholder="Email" required/>
             </div>
-
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="pass" class="form-control" id="pass" placeholder="Password" required/>
-            </div>
+                Password
+                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                   title="• Deve essere lunga almeno 6 caratteri
+                 • Deve contenere almeno una maiuscola, una minuscola e un numero
+                 • Deve contenere caratteri speciali"
+                   style="cursor: pointer; margin-left: 8px;">
+                </i>
+                </label>
+
+            <input type="password" name="pass" class="form-control" id="pass" placeholder="Password" required/>
+    </div>
 
             <div class="form-group">
                 <label for="password">Confirm Password</label>
@@ -38,3 +45,10 @@
 
     </div>
 </div>
+<!-- Inizializza il Tooltip Usato AI -->
+<script>
+    $(document).ready(function() {
+        // Attiva il tooltip su tutti gli elementi con data-toggle="tooltip"
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
