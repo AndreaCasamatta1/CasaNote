@@ -41,9 +41,15 @@ class user
 
         if (isset($_POST['oldPassword'], $_POST['newPassword']) && isset($_SESSION['UserId'])) {
             $oldPassword = $_POST['oldPassword'];
+
             $newPassword = $_POST['newPassword'];
             $userId = $_SESSION['UserId'];
-
+            $passwordValidation = $this->validator->validatePassword($newPassword);
+            if (!$passwordValidation) {
+                require_once 'application/views/_templates/error.php';
+                $this->index();
+                exit();
+            }
             if ($this->authModel->updatePassword($userId, $newPassword,$oldPassword)) {
                 header("location: " . URL . "home/main");
                 exit();

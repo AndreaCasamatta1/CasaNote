@@ -9,7 +9,6 @@ class authModel
     {
         $this->conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE, PORT);
     }
-
     public function getUserInfo($email)
     {
 
