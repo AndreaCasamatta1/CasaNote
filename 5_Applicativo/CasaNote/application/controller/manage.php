@@ -196,7 +196,7 @@ class manage
                     //
                     //'/*' è il pattern di ricerca
                     $files = glob($directory . '/*');
-                    logger::info('files: ' . $files);
+                    logger::info('files: ' . count($files));
                     foreach ($files as $file) {
                         $zip->addFile($file, basename($file));
                     }
