@@ -65,6 +65,10 @@ class validator
 
         return true;
     }
+    function isUserLoggedIn() {
+        return isset($_SESSION["email"], $_SESSION["name"], $_SESSION["UserId"]);
+    }
+
 
 
 

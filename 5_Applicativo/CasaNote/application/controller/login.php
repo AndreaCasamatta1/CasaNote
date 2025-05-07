@@ -35,30 +35,44 @@ class login
                 exit();
             }
             $result = $this->authModel->verifyUser($email, $pass);
+            $resultInfo = $this->authModel->getUserInfo($email);
             if ($result) {
-                $_SESSION["UserId"] = $result['id'];
-                $_SESSION["name"] = $result['username'];
-                $_SESSION["email"] = $result['email'];
 
+                $_SESSION["UserId"] = $resultInfo['id'];
+                $_SESSION["name"] = $resultInfo['username'];
+                $_SESSION["email"] = $resultInfo['email'];
                 header("Location:" . URL . "home/main");
                 exit();
             } else {
                 require_once 'application/views/_templates/error.php';
                 $this->index();
             }
+
+
         }
 
     }
 
     public function logout()
     {
-
-        unset($_SESSION['UserId']);
-
+        logger::info("entrato in logout");
+        session_start();
+        logger::info("sessione_start()");
+        $_SESSION = [];
+        logger::info("eliminate variabili sessioni");
+        if(isset($_COOKIE[session_name()])):
+            logger::info("Cookie eliminato: Session ID");
+            setcookie(session_name(),'',time()-70000000,'/');
+        endif;
         session_destroy();
-        header("Location:" . URL);
+        logger::info("distrutta sessioni");
+
+        header("Location: " . URL . "login");
         exit();
     }
+
+
+
 
 
 }

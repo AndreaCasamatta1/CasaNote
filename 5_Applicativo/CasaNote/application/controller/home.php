@@ -1,9 +1,11 @@
 <?php
+
 session_start();
 
 class home
 {
     private $noteMapper;
+    private $validator;
 
     public function index()
     {
@@ -16,23 +18,27 @@ class home
     {
         require 'application/models/noteMapper.php';
         $this->noteMapper = new \models\noteMapper();
+        require_once "application/libs/validator.php";
+        $this->validator = new validator();
     }
 
     public function main()
     {
-
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
         if (isset($_SESSION['order_by_date'])) {
             $order = $_SESSION['order_by_date'];
         } else {
             $order = 'asc';
         }
-
-
         $allNote = $this->noteMapper->fetchAllSortedByDate($order);
         require 'application/views/_templates/navbar2.php';
         require 'application/views/_templates/header.php';
         require 'application/views/manage/note.php';
         require 'application/views/_templates/footer.php';
+
     }
 
     public function filter()
@@ -51,9 +57,13 @@ class home
 
     public function resetFilter()
     {
-        unset($_SESSION['filtered_notes']);
-        unset($_SESSION['order_by_date']);
-        $this->main();
+        if ($this->validator->isUserLoggedIn()) {
+            unset($_SESSION['filtered_notes']);
+            unset($_SESSION['order_by_date']);
+            $this->main();
+        } else {
+            header("location: " . URL . "login");
+        }
     }
 
     public function deleteNote($id = null)
@@ -79,26 +89,32 @@ class home
     public function sortByDate()
     {
 
-
-        if (isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc') {
-            $_SESSION['order_by_date'] = 'asc';
+        if ($this->validator->isUserLoggedIn()) {
+            if (isset($_SESSION['order_by_date']) && $_SESSION['order_by_date'] === 'desc') {
+                $_SESSION['order_by_date'] = 'asc';
+            } else {
+                $_SESSION['order_by_date'] = 'desc';
+            }
+            $this->main();
         } else {
-            $_SESSION['order_by_date'] = 'desc';
+            header("location: " . URL . "login");
         }
-        $this->main();
     }
 
 
     public function user()
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
+
         require 'application/views/_templates/navbar2.php';
         require 'application/views/_templates/header.php';
         require 'application/views/profile/index.php';
         require 'application/views/_templates/footer.php';
+
     }
-
-
-
 
 
 }
