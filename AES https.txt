@@ -1,0 +1,11 @@
+Come funziona AES in HTTPS
+Handshake TLS: Quando un client (browser) si collega a un server HTTPS, avviene un handshake TLS (Transport Layer Security) 
+in cui vengono negoziati chiavi e algoritmi di crittografia.
+
+Scambio chiavi: Durante l'handshake, viene generata una chiave simmetrica condivisa, che spesso utilizza AES.
+
+Crittografia dei dati: Dopo l'handshake, AES viene utilizzato per crittografare i dati trasmessi, impedendo che siano intercettati da terzi.
+
+Decifratura: Il destinatario utilizza la stessa chiave simmetrica per decifrare i dati ricevuti.
+
+AES opera su blocchi di dati di 128 bit e supporta chiavi di 128, 192 o 256 bit
