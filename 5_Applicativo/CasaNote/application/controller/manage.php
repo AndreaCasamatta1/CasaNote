@@ -1,6 +1,6 @@
 <?php
 session_start();
-class manage
+class   manage
 {
     private $noteMapper;
     private $validator;
@@ -20,21 +20,39 @@ class manage
 
     function index()
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
 
     }
 
     function goToCreateNotePage($id = null)
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
         $note = $this->noteMapper->findById($id);
-
+        /*il "?" è un optional chanching che chiama la fuzione solo in caso
+        la variabile non sia null o undefined
+        */
+        $attachments = $this->attachmentMapper->findAll($note?->getId());
         require 'application/views/_templates/navbar2.php';
         require "application/views/_templates/header.php";
         require "application/views/manage/createNote.php";
-        return $note;
+        return [
+            'note' => $note,
+            'attachments' => $attachments
+        ];
     }
 
     public function deleteNote($id = null)
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
         if ($id === null) {
             echo "ID della nota non fornito.";
             return;
@@ -53,6 +71,10 @@ class manage
 
     public function saveOrUpdateNote($id = null)
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
         if ($id === null && isset($_POST['id'])) {
             $id = $this->validator->sanitizeInput($_POST['id']);
         }
@@ -93,46 +115,64 @@ class manage
 
     public function saveAttachment()
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
+        /*
+        La funzione saveAttachment() gestisce il salvataggio degli allegati collegati ad una annotazione, ottenendo i dati dalla modalità POST. 
+        A seconda della tipologia degli allegati (file, testo, disegno) compie diverse operazioni:
+        Allegato file.: Se il dato è d'un file verifica l'avvenuto caricamento e lo registra in una cartella propria della nota, 
+        aggiornando pure il database col path del file.
+        Allegato testo.: Se il dato è un testo scrive il dato in un file di testo e lo registra in stetta cartella della nota attualmente in modifica, 
+        andando anche a inserire il path nel DB.
+        Allegato disegno : I dati conseguiti sono un'immagine di tipo base64; si decodificano i dati dell'immagine; 
+        quindi si salva il file in un file PNG; e s'aggiorna il database di conseguenza.
+        */
 
+        // Verifica che il tipo di allegato sia stato fornito attraverso il metodo POST.
         if (isset($_POST['attachment_type'])) {
             $attachmentType = $_POST['attachment_type'];
             $noteId = $this->noteMapper->getLastNoteId();
-
+    
+            // Se l'ID della nota è nullo, significa che la nota non esiste, quindi segnaliamo un errore andando a specificarlo anche nei logger.
             if ($noteId === null) {
-                echo json_encode(['success' => false, 'message' => 'Nota non trovata']);
+                echo 'Nota non trovata';
                 logger::error('Nota non trovata');
                 exit();
             }
             logger::info('id ' . $noteId);
+            
+            // Crea una cartella per salvare gli allegati, se non esiste già.
             $noteFolder = "uploads/note_{$noteId}";
             if (!file_exists($noteFolder)) {
+                // Se la cartella non esiste, la crea con permessi di scrittura.
                 mkdir($noteFolder, 0777, true);
                 logger::info('Cartella creata' . $noteFolder);
             }
-
             switch ($attachmentType) {
                 case 'file':
-                    logger::info('Tipo di Attchment : File');
+                    logger::info('Tipo di Attachment : File');
                     if (isset($_FILES['attachment_file']) && $_FILES['attachment_file']) {
                         $fileName = basename($_FILES['attachment_file']['name']);
                         $filePath = $noteFolder . '/' . $fileName;
                         logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
                         if (move_uploaded_file($_FILES['attachment_file']['tmp_name'], $filePath)) {
                             $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, $_FILES['attachment_file']['type'], $noteId, 'file');
-                            logger::info('salvataggio file');
-                            echo json_encode(['success' => true]);
+                            logger::info('Salvataggio file');
+                            echo 'File caricato con successo';
                         } else {
-                            echo json_encode(['success' => false, 'message' => 'Errore nel caricamento del file']);
+                            echo 'Errore nel caricamento del file';
                             logger::error('Errore nel caricamento del file');
                         }
                     } else {
-                        echo json_encode(['success' => false, 'message' => 'Nessun file caricato']);
+                        echo 'Nessun file caricato';
                         logger::error('Nessun file caricato');
                     }
                     break;
+            
                 case 'text':
                     if (isset($_POST['attachment_content'])) {
-
                         $timestamp = date("Y-m-d_H-i-s");
                         $textContent = $_POST['attachment_content'];
                         $fileName = "testo_{$noteId}" . "-" . $timestamp . ".txt";
@@ -140,15 +180,15 @@ class manage
                         logger::info('POST DATA: ' . $filePath . ' ' . $fileName);
                         file_put_contents($filePath, $textContent);
                         $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, 'text/plain', $noteId, 'text');
-                        echo json_encode(['success' => true]);
+                        echo 'File di testo caricato con successo';
                         logger::info($fileName . " " . $filePath . " salvato");
-
-                        $_SESSION['countFiletxt'] = $this->countFiletxt;  // Salva il nuovo valore del contatore nella sessione
+                        $_SESSION['countFiletxt'] = $this->countFiletxt;
                     } else {
-                        echo json_encode(['success' => false, 'message' => 'Nessun testo fornito']);
+                        echo 'Nessun testo fornito';
                         logger::error($this->fileName . " " . $this->filePath . " fallito salvataggio");
                     }
                     break;
+            
                 case 'draw':
                     if (isset($_POST['attachment_content'])) {
                         $timestamp = date("Y-m-d_H-i-s");
@@ -158,21 +198,28 @@ class manage
                         $imageData = base64_decode(str_replace('data:image/png;base64,', '', $drawingContent));
                         file_put_contents($filePath, $imageData);
                         $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, 'image/png', $noteId, 'draw');
-                        echo json_encode(['success' => true]);
+                        echo 'Disegno caricato con successo';
                     } else {
-                        echo json_encode(['success' => false, 'message' => 'Nessun disegno fornito']);
+                        echo 'Nessun disegno fornito';
                     }
                     break;
+            
                 default:
-                    echo json_encode(['success' => false, 'message' => 'Tipo di allegato non valido']);
+                    echo 'Tipo di allegato non valido';
                     break;
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Tipo di allegato mancante']);
-        }
+            } else {
+                echo 'Tipo di allegato mancante';
+            }
     }
+    
+    
     public function zip($id = null)
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($id !== null) {
                 $notaName = "note_{$id}";
@@ -228,5 +275,29 @@ class manage
             }
         }
     }
+
+    public function deleteAttachment()
+    {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
+        \logger::info("deleteAttachment: 200");
+        if (isset($_POST['attachment_id'])) {
+            $attachmentId = $_POST['attachment_id'];
+            \logger::info("ID allegato: " . $attachmentId);
+            $result = $this->attachmentMapper->deleteAttachmentById($attachmentId);
+            if ($result) {
+                \logger::info("Eliminato allegato: ID $attachmentId");
+                header("location: " . URL . "manage/goToCreateNotePage");
+            } else {
+                \logger::error("Errore nell'eliminazione: allegato ID $attachmentId");
+            }
+        } else {
+            \logger::error("attachment_id nullo o undefained POST");
+        }
+    }
+    
+    
 }
 

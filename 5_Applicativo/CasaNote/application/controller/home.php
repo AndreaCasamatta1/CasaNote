@@ -43,6 +43,10 @@ class home
 
     public function filter()
     {
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
         $this->noteMapper = new \models\noteMapper();
 
         if (isset($_POST['field']) && !empty($_POST['field'])) {
@@ -69,6 +73,10 @@ class home
     public function deleteNote($id = null)
     {
 
+        if (!$this->validator->isUserLoggedIn()) {
+            header("location: " . URL . "login");
+            exit();
+        }
         if ($id === null) {
             require_once 'application/views/_templates/error.php';
             $this->index();

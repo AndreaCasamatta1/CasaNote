@@ -2,6 +2,7 @@
 // per non far dare errore all'IDE
 /* @var $note \models\note */
 include 'application/views/_templates/static/js/manageInput.php';
+include 'application/views/_templates/static/js/manageCanvas.php';
 
 ?>
 
@@ -35,6 +36,25 @@ include 'application/views/_templates/static/js/manageInput.php';
         <label for="title">Titolo</label>
         <input name="title" type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo" value="<?php if (isset($note)): echo $note->getTitle(); endif; ?>" required>
     </div>
+    <div id="attachments-list">
+    <?php if (isset($attachments) && count($attachments) > 0): ?>
+        <ul>
+            <?php foreach ($attachments as $attachment): ?>
+                <li data-id="<?php echo $attachment->getId(); ?>">
+                    <?php 
+                    $fileContent = file_get_contents($attachment->getFilePath());
+                    echo nl2br(htmlspecialchars($fileContent)); 
+                    ?>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="removeAttachmentFROMdb(<?php echo $attachment->getId(); ?>)">X</button>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Inizia a creare!</p>
+    <?php endif; ?>
+</div>
+
+    
     <br><br>
     <div id="dynamic-fields"></div>
 </form>

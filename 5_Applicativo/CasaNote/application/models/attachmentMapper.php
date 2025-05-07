@@ -20,6 +20,7 @@ class attachmentMapper
     public function saveAttachmentToDatabase($fileName, $filePath, $mimeType, $noteId, $attachmentType)
     {
         \logger::info("Entrato in funzione SQL");
+
         \logger::info("nome file in mapper: " . $fileName);
         \logger::info("path file in mapper: " . $filePath);
         \logger::info("tipo: " . $mimeType);
@@ -80,4 +81,55 @@ class attachmentMapper
 
         return null;
     }
+
+    public function findAll($id_note)
+    {
+        $query = "SELECT id, nome_file, percorso_file, mime_type FROM attachment WHERE note_id = ?";
+        $stmt = $this->connection->prepare($query);
+        if ($stmt === false) {
+            \logger::error("Errore nella query,  funzione findAll(), attachmentMapper. " . $this->connection->error);
+            return [];
+        }
+        $stmt->bind_param("i", $id_note);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result) {
+            $attachments = [];
+            while ($line = $result->fetch_assoc()) {
+                $decryptedFileName = $this->security->decrypt($line['nome_file']);
+                $decryptedFilePath = $this->security->decrypt($line['percorso_file']);
+                $attachment = new \models\attachment(
+                    $line['id'],
+                    $decryptedFileName,
+                    $decryptedFilePath,
+                    $line['mime_type'],
+                    $id_note
+                );
+                $attachments[] = $attachment;
+            }
+            return $attachments;
+        }
+        return [];
+    }
+    
+    public function deleteAttachmentById($attachmentId)
+    {
+        $query = "DELETE FROM attachment WHERE id = ?";
+        $stmt = $this->connection->prepare($query);
+        if ($stmt === false) {
+            \logger::error("Errore nella query: " . $this->connection->error);
+            return false;
+        }
+        $stmt->bind_param("i", $attachmentId);
+        $result = $stmt->execute();
+        if ($result) {
+            \logger::info("Allegato: ID $attachmentId eliminato con successo");
+        } else {
+            \logger::error("Errore nell'eliminazione dell'allegato: ID $attachmentId: " . $stmt->error);
+        }
+        return $result;
+    }
+    
+
+    
 }

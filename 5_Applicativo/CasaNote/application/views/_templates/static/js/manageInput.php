@@ -1,42 +1,101 @@
 <script>
 function addInput(type) {
     const dynamicFields = document.getElementById('dynamic-fields');
-    let newInput;
+    let newInput = document.createElement('div');
+    newInput.classList.add('mb-3', 'dynamic-input');
+
+    let content = '';
 
     if (type === 'text') {
-        newInput = document.createElement('div');
-        newInput.classList.add('mb-3');
-        newInput.innerHTML = `
+        content = `
             <label>Testo</label>
             <textarea name="attachments_text[]" class="form-control" rows="3" placeholder="Scrivi qua..."></textarea>
             <button type="button" class="btn btn-primary mt-2" onclick="saveTextAttachment(this)">Salva Testo</button>
         `;
     } else if (type === 'attachment') {
-        newInput = document.createElement('div');
-        newInput.classList.add('mb-3');
-        newInput.innerHTML = `
+        content = `
             <label>Allegato</label>
             <input type="file" name="attachments_file[]" class="form-control">
             <button type="button" class="btn btn-primary mt-2" onclick="saveFileAttachment(this)">Salva Allegato</button>
         `;
     } else if (type === 'draw') {
-        newInput = document.createElement('div');
-        newInput.classList.add('mb-3');
-        newInput.innerHTML = `
-            <label>Disegno</label>
+        content = `
             <canvas id="draw-canvas" class="canvas-container" width="500" height="300" style="border:1px solid #000000;"></canvas>
+            <button type="button" class="btn btn-primary mt-2" onclick="initDrawing()">disegna</button>
             <button type="button" class="btn btn-primary mt-2" onclick="saveDrawing(this)">Salva Disegno</button>
             <button type="button" class="btn btn-secondary mt-2" onclick="clearCanvas()">Clear Drawing</button>
         `;
     } else {
         return;
     }
+    
+    newInput.innerHTML = `
+        <div>
+            <div>
+                ${content}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm ms-2" onclick="removeInputFromDOM(this)" title="Rimuovi">✖</button>
+        </div>
+    `;
 
     dynamicFields.appendChild(newInput);
-    if (type === 'draw') {
-        initDrawing();
+}
+
+function removeInputFromDOM(button) {
+    /*Il metodo .closest() in JavaScript 
+    /*è usato per trovare l'antenato (parent) più vicino che corrisponde a un selettore CSS, 
+    /*partendo da un elemento specifico.
+    il .closest('.dynamic-input') parte dall'elemento button (cioè il pulsante "✖") 
+    e risale il DOM fino a trovare il primo elemento antenato (genitore, nonno, ecc.) 
+    che ha la classe dynamic-input.
+    */
+    const parent = button.closest('.dynamic-input');
+    if (parent) {
+    /*
+    Elimino l'elemento solo dal DOM in caso l'id è nullo, e quindi l'attachment non
+    è ancora stato salvato
+    */
+        parent.remove();
     }
 }
+
+function removeAttachmentFROMdb(attachmentId) {
+    if (confirm('Sei sicuro di procedere?')) {
+        const formData = new FormData();
+    /*
+    aggiunge l'ID dell'allegato (attachmentId) all'oggetto FormData con la chiave 'attachment_id', 
+    in modo che questo dato possa essere inviato al server tramite una richiesta AJAX.
+    */
+        formData.append('attachment_id', attachmentId);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '<?php echo URL; ?>manage/deleteAttachment', true);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                if (data.success) {
+                    const attachmentItem = document.querySelector(`li[data-id="${attachmentId}"]`);
+                    if (attachmentItem) {
+                        attachmentItem.remove();
+                    }
+                } else {
+                    alert('Errore nell\'eliminazione dell\'allegato');
+                }
+            } else {
+                alert('Errore nella richiesta.');
+            }
+        };
+
+        xhr.onerror = function() {
+            alert('Errore nella richiesta.');
+        };
+
+        xhr.send(formData);
+    }
+}
+
+
 
 function saveTextAttachment(button) {
     const textInput = button.previousElementSibling;
@@ -119,11 +178,5 @@ function saveDrawing(button) {
         alert('Errore nella richiesta.');
     };
     xhr.send(formData);
-}
-
-function clearCanvas() {
-    const canvas = document.getElementById('draw-canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 </script>

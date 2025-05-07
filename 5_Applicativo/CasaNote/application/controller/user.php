@@ -14,10 +14,18 @@ class user
     }
     function index()
     {
-        require 'application/views/_templates/navbar2.php';
-        require 'application/views/_templates/header.php';
-        require 'application/views/profile/index.php';
-        require 'application/views/_templates/footer.php';
+        if (isset($_SESSION["email"]) && (isset($_SESSION["name"]) && isset($_SESSION["UserId"]))){
+            require 'application/views/_templates/navbar2.php';
+            require 'application/views/_templates/header.php';
+            require 'application/views/profile/index.php';
+            require 'application/views/_templates/footer.php';
+        }
+        else{
+            require 'application/views/_templates/header.php';
+            require 'application/views/_templates/navbar.php';
+            require_once 'application/views/login/index.php';
+        }
+
 
 
     }

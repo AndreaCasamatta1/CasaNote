@@ -70,9 +70,4 @@ class login
         header("Location: " . URL . "login");
         exit();
     }
-
-
-
-
-
 }

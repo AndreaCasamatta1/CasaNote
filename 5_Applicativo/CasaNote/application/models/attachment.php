@@ -18,8 +18,10 @@ class attachment
         $this->mimeType = $mimeType;
         $this->noteId = $noteId;
     }
-
-    // Getter e Setter
+    
+    public function getId() {
+        return $this->id;
+    }
     public function getFileName() {
         return $this->fileName;
     }
@@ -35,4 +37,5 @@ class attachment
     public function getNoteId() {
         return $this->noteId;
     }
+
 }

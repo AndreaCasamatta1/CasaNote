@@ -186,4 +186,22 @@ class noteMapper
         }
         return null;
     }
+
+    public function getLastNoteIdByUser($userId)
+    {
+        $selectNote = "SELECT id FROM note WHERE user_id = ? ORDER BY id DESC LIMIT 1";
+        $stmt = $this->connection->prepare($selectNote);
+        if ($stmt === false) {
+            \logger::error('Errore query: ' . $this->connection->error);
+            return null;
+        }
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($line = $result->fetch_assoc()) {
+            return (int) $line['id'];
+        }
+        return null;
+    }
+    
 }
