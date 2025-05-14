@@ -7,11 +7,8 @@ include 'application/views/_templates/static/js/manageCanvas.php';
 ?>
 
 <form method="POST" action="<?php echo URL; ?>manage/saveOrUpdateNote<?php if (isset($note)): echo '/' . $note->getId(); endif; ?>">
-    <nav class="navbar navbar-expand-lg m-0">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><img src="application/libs/img/logo.png" width="30" height="30" alt=""></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+    <nav class="navbar navbar-expand-lg m-0 mb-4">
+        <div class="navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <button type="submit" class="btn btn-primary">Salva</button>
@@ -31,6 +28,7 @@ include 'application/views/_templates/static/js/manageCanvas.php';
             </ul>
         </div>
     </nav>
+
 
     <div class="form-group">
         <label for="title">Titolo</label>

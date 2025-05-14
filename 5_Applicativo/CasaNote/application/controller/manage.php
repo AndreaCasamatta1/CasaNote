@@ -228,7 +228,6 @@ class   manage
                     $_SESSION["errors"] []  = "Allegato non valido";
                     require_once 'application/views/_templates/error.php';
                     $this->index();
-                    exit();
                     break;
             }
             } else {
@@ -249,7 +248,7 @@ class   manage
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($id !== null) {
                 $nameTitle= $_SESSION['title'];
-                $notaName = "note_{$_SESSION['title']}";
+                $notaName = "note_{$id}";
                 logger::info('nome nota: ' . $notaName);
                 $zipFileName = "{$notaName}.zip";
                 logger::info('nome cartella: ' . $zipFileName);
