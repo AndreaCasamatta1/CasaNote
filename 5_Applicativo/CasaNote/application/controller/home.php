@@ -69,30 +69,7 @@ class home
             header("location: " . URL . "login");
         }
     }
-
-    public function deleteNote($id = null)
-    {
-
-        if (!$this->validator->isUserLoggedIn()) {
-            header("location: " . URL . "login");
-            exit();
-        }
-        if ($id === null) {
-            require_once 'application/views/_templates/error.php';
-            $this->index();
-            return;
-        }
-
-        $note = $this->noteMapper->findById($id);
-
-        if ($note && $this->noteMapper->deleteNote($note)) {
-            header("location: " . URL . "home/main");
-            exit();
-        } else {
-            require_once 'application/views/_templates/error.php';
-            $this->index();
-        }
-    }
+    
 
     public function sortByDate()
     {

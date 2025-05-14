@@ -24,12 +24,12 @@ class login
     {
 
         if (isset($_POST['login'])) {
-
             require_once 'application/libs/validator.php';
 
             $email = $this->validator->sanitizeMail($_POST['email']);
             $pass = $this->validator->sanitizeInput($_POST['pass']);
             if (!$this->validator->validateEmail($email)) {
+                $_SESSION["errors"] []  = "Errore nel login, email o password, errati o non esistenti";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
                 exit();
@@ -44,8 +44,10 @@ class login
                 header("Location:" . URL . "home/main");
                 exit();
             } else {
+                $_SESSION["errors"] []  = "Errore nel login, email o password, errati o non esistenti";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
+
             }
 
 

@@ -54,7 +54,8 @@ class   manage
             exit();
         }
         if ($id === null) {
-            echo "ID della nota non fornito.";
+            $_SESSION["errors"] [] ="ID della nota mancante.";
+            require_once 'application/views/_templates/error.php';
             return;
         }
         $note = $this->noteMapper->findById($id);
@@ -63,6 +64,7 @@ class   manage
                 header("location: " . URL . "home/resetFilter");
                 exit();
             } else {
+                $_SESSION["errors"] [] ="Errore durante l'eliminazione della nota";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
             }
@@ -90,6 +92,7 @@ class   manage
                         header('location:' . URL . 'home/resetFilter');
                         exit();
                     } else {
+                        $_SESSION["errors"] [] ="Errore durante la modifica della nota";
                         require_once 'application/views/_templates/error.php';
                         $this->index();
                     }
@@ -106,6 +109,7 @@ class   manage
                     header('location:' . URL . 'home/resetFilter');
                     exit();
                 } else {
+                    $_SESSION["errors"] [] ="Errore durante il salvataggio della nota";
                     require_once 'application/views/_templates/error.php';
                     $this->goToCreateNotePage();
                 }
@@ -137,7 +141,8 @@ class   manage
     
             // Se l'ID della nota è nullo, significa che la nota non esiste, quindi segnaliamo un errore andando a specificarlo anche nei logger.
             if ($noteId === null) {
-                echo 'Nota non trovata';
+                $_SESSION["errors"] [] ="Nota non trovata";
+                require_once 'application/views/_templates/error.php';
                 logger::error('Nota non trovata');
                 exit();
             }
@@ -162,11 +167,13 @@ class   manage
                             logger::info('Salvataggio file');
                             echo 'File caricato con successo';
                         } else {
-                            echo 'Errore nel caricamento del file';
+                            $_SESSION["errors"] [] ="Errore durante il salvataggio della nota";
+                            require_once 'application/views/_templates/error.php';
                             logger::error('Errore nel caricamento del file');
                         }
                     } else {
-                        echo 'Nessun file caricato';
+                        $_SESSION["errors"] [] ="Nessun file caricato";
+                        require_once 'application/views/_templates/error.php';
                         logger::error('Nessun file caricato');
                     }
                     break;
@@ -184,7 +191,8 @@ class   manage
                         logger::info($fileName . " " . $filePath . " salvato");
                         $_SESSION['countFiletxt'] = $this->countFiletxt;
                     } else {
-                        echo 'Nessun testo fornito';
+                        $_SESSION["errors"] []  = "Nessun testo fornito";
+                        require_once 'application/views/_templates/error.php';
                         logger::error($this->fileName . " " . $this->filePath . " fallito salvataggio");
                     }
                     break;
@@ -198,18 +206,20 @@ class   manage
                         $imageData = base64_decode(str_replace('data:image/png;base64,', '', $drawingContent));
                         file_put_contents($filePath, $imageData);
                         $this->attachmentMapper->saveAttachmentToDatabase($fileName, $filePath, 'image/png', $noteId, 'draw');
-                        echo 'Disegno caricato con successo';
                     } else {
-                        echo 'Nessun disegno fornito';
+                        $_SESSION["errors"] []  = "Nessun disegno fornito";
+                        require_once 'application/views/_templates/error.php';
                     }
                     break;
             
                 default:
-                    echo 'Tipo di allegato non valido';
+                    $_SESSION["errors"] []  = "Allegato non valido";
+                    require_once 'application/views/_templates/error.php';
                     break;
             }
             } else {
-                echo 'Tipo di allegato mancante';
+            $_SESSION["errors"] []  = "Allegato mancante";
+            require_once 'application/views/_templates/error.php';
             }
     }
     
@@ -270,7 +280,8 @@ class   manage
                     // per evitare di lasciare file inutili sul server.
                     unlink($zipPath);
                 } else {
-                    echo "Impossibile creare il file ZIP.";
+                    $_SESSION["errors"] []  = "Creazione file zip fallita";
+                    require_once 'application/views/_templates/error.php';
                 }
             }
         }
@@ -291,9 +302,13 @@ class   manage
                 \logger::info("Eliminato allegato: ID $attachmentId");
                 header("location: " . URL . "manage/goToCreateNotePage");
             } else {
+                $_SESSION["errors"] []  = "Errore nell'eliminazione dell'attachment";
+                require_once 'application/views/_templates/error.php';
                 \logger::error("Errore nell'eliminazione: allegato ID $attachmentId");
             }
         } else {
+            $_SESSION["errors"] []  = "Errore nell'eliminazione dell'attachment";
+            require_once 'application/views/_templates/error.php';
             \logger::error("attachment_id nullo o undefained POST");
         }
     }

@@ -29,24 +29,27 @@ class register
             $password = $this->validator->sanitizeInput($_POST['pass']);
             $password_confirm = $this->validator->sanitizeInput($_POST['pass2']);
             if (!$this->validator->validateEmail($email)) {
+                $_SESSION["errors"] []  = "La email non rispetta i criteri.";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
                 exit();
             }
             $passwordValidation = $this->validator->validatePassword($password);
             if (!$passwordValidation) {
+                $_SESSION["errors"] []  = "La password non rispetta i criteri";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
                 exit();
             }
             if ($password !== $password_confirm) {
+                $_SESSION["errors"] []  = "Le password non corrispondono";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
                 exit();
             }
-            $result = $this->authModel->registerUser($name, $email, $password, $password_confirm);
-            logger::info($result);
-            if ($result) {
+            $resultRegister = $this->authModel->registerUser($name, $email, $password, $password_confirm);
+            logger::info($resultRegister);
+            if ($resultRegister) {
                 $result = $this->authModel->getUserInfo($email);
                 logger::info('Dati restituiti da getData: ' . print_r($result, true));
                 if($result) {
@@ -57,15 +60,18 @@ class register
                     header("Location:" . URL . "home/main");
                     exit();
                 } else {
-                    logger::error("Errore: utente non trovato, password errata o email gia in uso.");
+                    logger::error("Errore: password errata o email gia in uso.");
+                    $_SESSION["errors"] []  = "Errore, password errata o email gia in uso.";
                     require_once 'application/views/_templates/error.php';
                     $this->index();
                     exit();
                 }
 
             } else {
+                $_SESSION["errors"] []  = "Errore durante la registrazione.";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
+                exit();
             }
         }
 

@@ -40,6 +40,7 @@ class user
                 header("location: " . URL . "home/main");
                 exit();
             } else {
+                $_SESSION["errors"] []  = "Errore durante l'aggiornamento del nome";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
             }
@@ -55,6 +56,7 @@ class user
             $userId = $_SESSION['UserId'];
             $passwordValidation = $this->validator->validatePassword($newPassword);
             if (!$passwordValidation) {
+                $_SESSION["errors"] []  = "Password non rispetta i criteri";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
                 exit();
@@ -63,6 +65,7 @@ class user
                 header("location: " . URL . "home/main");
                 exit();
             } else {
+                $_SESSION["errors"] []  = "Errore durante l'aggiornamento della password";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
             }
@@ -78,6 +81,7 @@ class user
                 header("location: " . URL . "logout");
                 exit();
             } else {
+                $_SESSION["errors"] []  = "Eliminazione account fallita";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
             }
