@@ -61,14 +61,14 @@ class register
                     exit();
                 } else {
                     logger::error("Errore: password errata o email gia in uso.");
-                    $_SESSION["errors"] []  = "Errore, password errata o email gia in uso.";
+                    $_SESSION["errors"] []  = "Password errata o email gia in uso.";
                     require_once 'application/views/_templates/error.php';
                     $this->index();
                     exit();
                 }
 
             } else {
-                $_SESSION["errors"] []  = "Errore durante la registrazione.";
+                $_SESSION["errors"] []  = "Email già presente.";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
                 exit();

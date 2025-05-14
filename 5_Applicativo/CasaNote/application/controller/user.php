@@ -65,9 +65,10 @@ class user
                 header("location: " . URL . "home/main");
                 exit();
             } else {
-                $_SESSION["errors"] []  = "Errore durante l'aggiornamento della password";
+                $_SESSION["errors"] []  = "Errore durante l'aggiornamento della password, non corrispondono";
                 require_once 'application/views/_templates/error.php';
                 $this->index();
+                exit();
             }
         }
     }
