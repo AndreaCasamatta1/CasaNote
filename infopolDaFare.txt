@@ -1,0 +1,5 @@
+Per mettere attachments salvare prima il titolo;
+Per esportare salvare prima l'attachments;
+Quando si salva un attachments lo si manda subito scritto sulla pagina, input scompare ma compare un testo non modificabile sulla pagina
+immagini da visualizzare
+titolo solo degli allegati non contenuto

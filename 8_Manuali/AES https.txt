@@ -1,0 +1,20 @@
+Come funziona AES in HTTPS
+Handshake TLS: Quando un client (browser) si collega a un server HTTPS, avviene un handshake TLS (Transport Layer Security) 
+in cui vengono negoziati chiavi e algoritmi di crittografia.
+
+Scambio chiavi: Durante l'handshake, viene generata una chiave simmetrica condivisa, che spesso utilizza AES.
+
+Crittografia dei dati: Dopo l'handshake, AES viene utilizzato per crittografare i dati trasmessi, impedendo che siano intercettati da terzi.
+
+Decifratura: Il destinatario utilizza la stessa chiave simmetrica per decifrare i dati ricevuti.
+
+AES opera su blocchi di dati di 128 bit e supporta chiavi di 128, 192 o 256 bit
+
+La classe security che hai fornito implementa un sistema di criptografia per proteggere i dati utilizzando il cifrario AES-256-CBC con una chiave di cifratura segreta e una funzione di inizializzazione (IV) per ogni operazione di cifratura. Ecco una spiegazione dettagliata di ciò che fa il codice:
+
+1. Variabili di Classe:
+$encryption_key: è una chiave segreta utilizzata per la cifratura e la decifrazione dei dati. In questo caso è una lunga stringa alfanumerica.
+
+$cipher: indica l'algoritmo di cifratura che viene utilizzato. In questo caso, è AES-256-CBC, che è una versione avanzata di AES con chiave a 256 bit e modalità CBC (Cipher Block Chaining).
+
+$iv_size: la dimensione dell'IV (Initialization Vector), che è una variabile casuale che viene utilizzata per aumentare la sicurezza della cifratura.

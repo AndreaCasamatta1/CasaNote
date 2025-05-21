@@ -1,0 +1,7 @@
+blocco note: 
+-tutto cifrato ( testo e login e dati DB)
+- esportazione in txt, pdf, immagine
+- registrazione audio 
+- responsive 
+- canvas (ULTIMA COSA)
+- deploy / hosting

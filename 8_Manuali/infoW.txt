@@ -1,0 +1,14 @@
+\W, quindi, corrisponde a qualsiasi carattere che non è alfanumerico né underscore. In altre parole: caratteri speciali, come !@#$%^&*(), spazi, simboli di punteggiatura, ecc.
+
+Cosa fa il codice
+La condizione:
+
+php
+Copia
+Modifica
+if (!preg_match('/[\W]/', $password))
+verifica se non c'è nessun carattere speciale nella stringa $password.
+
+Se la password non contiene alcun carattere speciale, allora preg_match restituisce false, il ! lo inverte in true, e quindi il return false viene eseguito.
+
+In pratica: la funzione restituisce false se la password non ha almeno un carattere speciale
