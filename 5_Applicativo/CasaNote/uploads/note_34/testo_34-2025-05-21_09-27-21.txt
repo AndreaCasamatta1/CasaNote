@@ -1,3 +1,0 @@
-1-attachmentMapper stato: in corso
-2-authModel stato: da fare
-3-noteMapper stato: da fare

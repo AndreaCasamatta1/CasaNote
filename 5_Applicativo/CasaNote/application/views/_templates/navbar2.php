@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #1E2A38; border-radius: 12px; margin: 10px;">
-    <div class="container-fluid px-3">
+    <div class="container-fluid px-3 ">
         <div class="d-flex align-items-center" style="user-select:none; cursor: default;">
             <img src="/application/libs/img/logo.png" alt="Logo CasaNote" width="35" height="35" class="me-2" style="border-radius: 8px;">
             <span class="navbar-brand mb-0 h4 text-white" style="font-weight: 600;">CasaNote</span>
@@ -22,8 +22,8 @@
             </ul>
 
             <!-- Profilo e Logout a destra -->
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item d-flex">
+            <ul class="navbar-nav ms-auto justify-content-end">
+            <li class="nav-item d-flex">
                     <a class="nav-link d-none d-lg-flex align-items-center <?php echo (str_ends_with($_SERVER['REQUEST_URI'], '/home/user')) ? 'active text-white' : 'text-light'; ?>"
                        href="<?php echo URL ?>home/user" style="font-weight: 600; font-size: 1.5rem; transition: color 0.3s;">
                         <i class="fas fa-user-circle me-1"></i>
