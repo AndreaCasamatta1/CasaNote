@@ -20,10 +20,7 @@
         </div>
     </div>
 
-    <!-- Card funzionali -->
     <div class="row g-4">
-
-        <!-- Modifica Nome -->
         <div class="col-12 col-md-4">
             <div class="card shadow-sm h-100">
                 <div class="card-body d-flex flex-column justify-content-between">
@@ -44,7 +41,7 @@
         </div>
 
         <!-- Modifica Password -->
-        <div class="col-12 col-md-4">
+        <div class=" col-12 col-md-4">
             <div class="card shadow-lg h-100 border-0">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <form method="POST" action="<?php echo URL; ?>user/updatePassword" class="d-flex flex-column h-100 justify-content-between">
@@ -84,7 +81,7 @@
                             <button
                                 type="submit"
                                 name="updatePassword"
-                                class="btn btn-primary px-4 py-2 w-75">
+                                class="btn btn-primary px-4 py-2 w-100">
                                 Aggiorna Password
                             </button>
                         </div>

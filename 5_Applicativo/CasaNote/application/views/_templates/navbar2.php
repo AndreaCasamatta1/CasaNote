@@ -23,7 +23,7 @@
 
             <!-- Profilo e Logout a destra -->
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item d-flex align-items-center">
+                <li class="nav-item d-flex">
                     <a class="nav-link d-none d-lg-flex align-items-center <?php echo (str_ends_with($_SERVER['REQUEST_URI'], '/home/user')) ? 'active text-white' : 'text-light'; ?>"
                        href="<?php echo URL ?>home/user" style="font-weight: 600; font-size: 1.5rem; transition: color 0.3s;">
                         <i class="fas fa-user-circle me-1"></i>

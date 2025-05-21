@@ -23,7 +23,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* sfondo blu-grigio tech */
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
             min-height: 100vh;
             padding: 20px 15px;
             color: #f1f1f1;
@@ -33,8 +33,8 @@
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            padding: 20px 30px;  /* padding più generoso */
-            max-width: 1400px;    /* riquadro più largo */
+            padding: 20px 30px;
+            max-width: 1400px;
             margin: auto;
             color: #333;
         }
