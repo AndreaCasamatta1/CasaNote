@@ -1,7 +1,0 @@
-https://getbootstrap.com/ 
-https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
-https://phpnews.it/session_start/#:~:text=Per%20utilizzare%20le%20sessioni%2C%20%C3%A8,accedere%20ai%20dati%20di%20sessione --> sito per session_start()
-https://stackoverflow.com/questions/13862854/deleting-a-php-cookie-upon-user-logout
-https://stackoverflow.com/questions/36877/how-do-you-set-up-use-httponly-cookies-in-php
-https://stackoverflow.com/questions/2310558/how-to-delete-all-cookies-of-my-website-in-php
-https://www.php.net/manual/en/function.session-destroy.php

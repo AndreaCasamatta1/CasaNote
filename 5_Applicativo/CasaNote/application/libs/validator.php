@@ -20,6 +20,14 @@ class validator
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
+        // Rimuove caratteri di controllo (CR, LF, TAB, ecc.)
+        $data = preg_replace('/[\x00-\x1F\x7F]/u', '', $data);
+
+        // Rimuove caratteri usati per command injection e header injection
+        $data = preg_replace('/[;&|`$<>\r\n]/u', '', $data);
+
+        // Rimuove caratteri speciali LDAP injection
+        $data = preg_replace('/[\*\(\)=]/u', '', $data);
         return $data;
     }
     public function sanitizeMail($data)

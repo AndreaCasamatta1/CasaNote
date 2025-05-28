@@ -26,8 +26,8 @@ class register
             require_once 'application/libs/validator.php';
             $name = $this->validator->sanitizeInput($_POST['name']);
             $email = $this->validator->sanitizeMail($_POST['email']);
-            $password = $this->validator->sanitizeInput($_POST['pass']);
-            $password_confirm = $this->validator->sanitizeInput($_POST['pass2']);
+            $password = $_POST['pass'];
+            $password_confirm = $_POST['pass2'];
             if (!$this->validator->validateEmail($email)) {
                 $_SESSION["errors"] []  = "La email non rispetta i criteri.";
                 require_once 'application/views/_templates/error.php';
