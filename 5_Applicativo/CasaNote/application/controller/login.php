@@ -27,7 +27,7 @@ class login
             require_once 'application/libs/validator.php';
 
             $email = $this->validator->sanitizeMail($_POST['email']);
-            $pass = $this->validator->sanitizeInput($_POST['pass']);
+            $pass =$_POST['pass'];
             if (!$this->validator->validateEmail($email)) {
                 $_SESSION["errors"] []  = "Errore nel login, email o password, errati o non esistenti";
                 require_once 'application/views/_templates/error.php';
@@ -37,12 +37,11 @@ class login
             $result = $this->authModel->verifyUser($email, $pass);
             $resultInfo = $this->authModel->getUserInfo($email);
             if ($result) {
-
                 $_SESSION["UserId"] = $resultInfo['id'];
                 $_SESSION["name"] = $resultInfo['username'];
                 $_SESSION["email"] = $resultInfo['email'];
                 header("Location:" . URL . "home/main");
-                exit();
+
             } else {
                 $_SESSION["errors"] []  = "Errore nel login, email o password, errati o non esistenti";
                 require_once 'application/views/_templates/error.php';
