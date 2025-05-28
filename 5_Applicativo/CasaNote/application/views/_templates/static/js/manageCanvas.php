@@ -5,6 +5,8 @@
     let lastX = 0;
     let lastY = 0;
 
+
+    //funzione fatta con l'aiuto di chatgpt
     function initDrawing() {
         const canvas = document.getElementById('draw-canvas');
         const ctx = canvas.getContext('2d');
@@ -41,6 +43,7 @@
         isErasing = true;
     }
 
+    //funzione fatta con l'aiuto di chatgpt
     function clearCanvas() {
         const canvas = document.getElementById('draw-canvas');
         const ctx = canvas.getContext('2d');

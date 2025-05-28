@@ -166,6 +166,7 @@ class   manage
                 mkdir($noteFolder, 0777, true);
                 logger::info('Cartella creata' . $noteFolder);
             }
+            //SWITCH fatto con l'aiuto di chatgpt
             switch ($attachmentType) {
                 case 'file':
                     logger::info('Tipo di Attachment : File');
@@ -260,7 +261,7 @@ class   manage
             }
     }
     
-    
+    //funzione fatta con l'aiuto di chatgpt
     public function zip($id = null)
     {
         if (!$this->validator->isUserLoggedIn()) {

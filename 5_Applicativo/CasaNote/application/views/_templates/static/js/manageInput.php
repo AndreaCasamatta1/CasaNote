@@ -96,7 +96,7 @@ function removeAttachmentFROMdb(attachmentId) {
 }
 
 
-
+//funzione fatta con l'aiuto di chatgpt
 function saveTextAttachment(button) {
     const textInput = button.previousElementSibling;
     const form = document.querySelector('form');
@@ -124,6 +124,7 @@ function saveTextAttachment(button) {
     };
     xhr.send(formData);
 }
+
 function saveFileAttachment(button) {
     const fileInput = button.previousElementSibling;
     const form = document.querySelector('form');
@@ -151,6 +152,7 @@ function saveFileAttachment(button) {
     };
     xhr.send(formData);
 }
+
 function saveDrawing(button) {
     const canvas = document.getElementById('draw-canvas');
     const dataURL = canvas.toDataURL();
