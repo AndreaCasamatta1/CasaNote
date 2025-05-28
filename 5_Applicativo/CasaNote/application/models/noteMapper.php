@@ -242,5 +242,34 @@ class noteMapper
         }
         return null;
     }
-    
+
+    public function getIdByDateCreation($date_creation, $userId) {
+        \logger::info("Metodo: getIdByDateCreation");
+        $query = "SELECT id FROM note 
+              WHERE date_creation = ? 
+                AND user_id = ? 
+              LIMIT 1";
+
+        $stmt = $this->connection->prepare($query);
+        if (!$stmt) {
+            \logger::error("Errore preparazione statement: " . $this->connection->error);
+            return null;
+        }
+
+        $stmt->bind_param("si", $date_creation, $userId);
+        $stmt->execute();
+        $stmt->bind_result($noteId);
+        $found = $stmt->fetch();
+        $stmt->close();
+
+        if ($found) {
+            \logger::info("Nota trovata con ID: $noteId");
+            return $noteId;
+        } else {
+            \logger::info("Nessuna nota trovata con i parametri forniti");
+            return null;
+        }
+    }
+
+
 }

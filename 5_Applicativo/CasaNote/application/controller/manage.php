@@ -34,6 +34,7 @@ class   manage
             exit();
         }
         $note = $this->noteMapper->findById($id);
+        $_SESSION['note'] = $note?->getId();
         /*il "?" è un optional chanching che chiama la fuzione solo in caso
         la variabile non sia null o undefined
         */
@@ -81,6 +82,8 @@ class   manage
         if ($id === null && isset($_POST['id'])) {
             $id = $this->validator->sanitizeInput($_POST['id']);
         }
+        $data_creation = date('Y-m-d H:i:s');
+        $_SESSION['data_creation']=$data_creation;
         if ($id !== null) {
             if (isset($_POST['title'])) {
                 $title = $this->validator->sanitizeInput($_POST['title']);
@@ -89,9 +92,11 @@ class   manage
                 $data_last_update = date('Y-m-d H:i:s');
                 if ($noteToUpdate) {
                     $userId = $_SESSION['UserId'];
+                    $data_creation = $_SESSION['data_creation'];
                     $newNote = new \models\note($id, $title, $noteToUpdate->getDateCreation(), $data_last_update, $userId);
                     if ($this->noteMapper->updateNote($noteToUpdate, $newNote)) {
-                        header('location:' . URL . 'manage/goToCreateNotePage/' . $this->noteMapper->getLastNoteId());
+                        $_SESSION['noteId'] = $this->noteMapper->getIdByDateCreation($noteToUpdate->getDateCreation(),$userId );
+                        header('location:' . URL . 'manage/goToCreateNotePage/' . $_SESSION['noteId']);
                         exit();
                     } else {
                         $_SESSION["errors"] [] ="Errore durante la modifica della nota";
@@ -104,11 +109,11 @@ class   manage
             if (isset($_POST['title'])) {
                 $title = $this->validator->sanitizeInput($_POST['title']);
                 $_SESSION['title'] = $title;
-                $data_creation = date('Y-m-d H:i:s');
                 $data_last_update = date('Y-m-d H:i:s');
                 $userId = $_SESSION['UserId'];
                 $note = new \models\note(null, $title, $data_creation, $data_last_update, $userId);
                 if ($this->noteMapper->addNote($note)) {
+                    $_SESSION['noteId'] = $this->noteMapper->getIdByDateCreation($_SESSION['data_creation'],$userId );
                     header('location:' . URL . 'manage/goToCreateNotePage/' . $this->noteMapper->getLastNoteId() );
                     exit();
                 } else {
@@ -141,7 +146,8 @@ class   manage
         // Verifica che il tipo di allegato sia stato fornito attraverso il metodo POST.
         if (isset($_POST['attachment_type'])) {
             $attachmentType = $_POST['attachment_type'];
-            $noteId = $this->noteMapper->getLastNoteId();
+            $userId = $_SESSION['UserId'];
+            $noteId = $_SESSION['note'];
     
             // Se l'ID della nota è nullo, significa che la nota non esiste, quindi segnaliamo un errore andando a specificarlo anche nei logger.
             if ($noteId === null) {
@@ -352,7 +358,9 @@ class   manage
                 $result = $this->attachmentMapper->deleteAttachmentById($attachmentId);
                 if ($result) {
                     \logger::info("Eliminato allegato: ID $attachmentId");
-                    header('location:' . URL . 'manage/goToCreateNotePage/' . $this->noteMapper->getLastNoteId());
+                    $data_creation =$_SESSION['data_creation'];
+                    $userId = $_SESSION['UserId'];
+                    header('location:' . URL . 'manage/goToCreateNotePage/' . $this->noteMapper->getIdByDateCreation($data_creation,$userId));
                     exit();
                 } else {
                     $_SESSION["errors"][] = "Errore nell'eliminazione dell'attachment";
